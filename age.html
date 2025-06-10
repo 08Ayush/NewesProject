@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="media\metro2.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title></title>
+    <style>
+        .header {
+    color: white;
+    background-color: #013C84;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .weather, .datetime, .lang-switch {
+        white-space: nowrap;
+    }
+
+    .navbar-custom {
+        background-color: #013C84;
+    }
+
+    .lang-switch a {
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        margin: 0 5px;
+    }
+
+    .lang-switch a:hover {
+        text-decoration: underline;
+    }
+
+    .dropdown-menu-custom {
+        display: none;
+        position: absolute;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px 10px;
+        z-index: 1000;
+        top: 100%;
+        min-width: 120px;
+        right: 0;
+    }
+
+    .dropdown-menu-custom a {
+        display: block;
+        padding: 5px 8px;
+        color: #000;
+        text-decoration: none;
+    }
+
+    .dropdown-menu-custom a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .header3 {
+        background-color: #013C84;
+    }
+
+    /* .toggle-button {
+        background: transparent;
+        border: none;
+        color: white;
+    } */
+
+    .hidden-nav-links {
+        display: none !important;
+    }
+
+    #hindiNav {
+        flex-grow: 1;
+        display: flex;
+    }
+
+    .nav-item a {
+        color: white !important;
+    }
+
+    .calculator-container{
+       
+        margin: 0 auto;
+        margin-bottom: 100px;
+    }
+    .bg-light a{
+      color: inherit;
+      text-decoration: none;
+    }
+    
+    </style>
+</head>
+<body>
+    <header>
+    <div class="container-fluid header ">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="weather" id="weather">
+            🌤️ Loading...
+        </div>
+        <div class="datetime text-center " id="datetime">
+            <!-- JavaScript fills this -->
+        </div>
+        <div class="lang-switch text-end position-relative">
+            <span>
+            <a class="lang-option" onclick="toggleDropdown('langDropdown')">EN</a> |
+            <a class="city-option" onclick="toggleDropdown('cityDropdown')">NG</a>
+            </span>
+
+            <!-- Language Dropdown -->
+            <div id="langDropdown" class="dropdown-menu-custom">
+            <a href="#" onclick="switchLanguage('en')">English</a>
+            <a href="#" onclick="switchLanguage('hi')">Hindi</a>
+            <a href="#" onclick="switchLanguage('mr')">Marathi</a>
+            </div>
+
+            <!-- City Dropdown -->
+            <div id="cityDropdown" class="dropdown-menu-custom">
+
+                <a href="#" onclick="switchCity('Aurangabad')">Aurangabad</a>
+                <a href="#" onclick="switchCity('Nagpur')">Nagpur</a>
+                <a href="#" onclick="switchCity('Nashik')">Nashik</a>
+                <a href="#" onclick="switchCity('Mumbai')">Mumbai</a>
+                <!-- <a href="#" onclick="switchCity('Delhi')">Delhi</a> -->
+                <a href="#" onclick="switchCity('Pune')">Pune</a>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+    <div class="header2 container  d-flex align-items-center justify-content-between" >
+        <a href="newhome.html" class="logo-link">
+            <img class="logo" src="media/metro2.png" style="max-width: 150px;">
+        </a>
+        <button class="toggle-button btn d-block d-lg-none" type="button" onclick="openSidebar()" aria-label="Toggle Menu" style="color: #013C84;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#013C84" class="bi bi-list" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg>
+    </button>
+    </div>
+  <div id="header3">
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <!-- Toggle Button -->
+      <button class="toggle-button btn d-none d-lg-block" type="button" onclick="openSidebar()" aria-label="Toggle Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg>
+      </button>
+
+      <!-- Nav Items -->
+      <div id="hindiNav" class="overflow-auto w-100 ms-3">
+        <ul class="navbar-nav flex-row flex-nowrap">
+          <li class="nav-item me-3"><a class="nav-link" href="#">होम</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">देश</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">शहर और राज्य</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">मनोरंजन</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">क्रिकेट</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">ज्योतिष</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">और भी...</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</div>
+
+</header>
+
+<div class="container calculator-container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm p-4">
+                    <h1 class="text-center mb-4">Age Calculator</h1>
+                    <div class="mb-3">
+                        <label for="birthDate" class="form-label">Enter your birth date:</label>
+                        <input type="date" id="birthDate" class="form-control">
+                    </div>
+                    <button onclick="calculateAge()" class="btn btn-primary w-100">Calculate Age</button>
+                    <p id="result" class="mt-3 text-center fs-5"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Footer Section -->
+    <footer class="bg-light pt-4">
+        <div class="container">
+            <div class="row">
+            <!-- Logo & Contact Info -->
+            <div class="col-md-3 mb-4">
+                <img src="media/metro.png" alt="Metro Link Live" style="max-width: 150px;">
+                <p class="mt-3 mb-1"><strong>LIVE NEWS</strong><br>Metro Link</p>
+                <P class = "mt-3 mb-1" style="font-size: 15px;">RNI Regd.No MAHMUL03198/13/1/2013-TC</P>
+                <p><strong>Follow Us</strong></p>
+            </div>
+
+                <!-- News Columns -->
+                <div class="col-md-2 mb-4">
+                    <h6><strong>News From Indian States</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Maharashtra News</a></li>
+                    <li><a href="#">Madhya Pradesh News</a></li>
+                    <li><a href="#">Delhi News</a></li>
+                    </ul>
+                    <h6><strong>Technology</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Artificial intelligence</a></li>
+                    <li><a href="#">Cryptography</a></li>
+                    <li><a href="#">Cyber Security</a></li>
+                    </ul>
+                </div>
+
+                <!-- Lifestyle -->
+                <div class="col-md-2 mb-4">
+                    <h6><strong>Lifestyle</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Health News</a></li>
+                    <li><a href="#">Fitness News</a></li>
+                    <li><a href="#">Fashion News</a></li>
+                    <li><a href="#">Spirituality</a></li>
+                    <li><a href="#">Astrology</a></li>
+                    <li><a href="#">Daily Horoscope</a></li>
+                    <li><a href="#">Astrology Predictions</a></li>
+                    <li><a href="#">Astrologers</a></li>
+                    <li><a href="#">Pujas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Entertainment -->
+                <div class="col-md-2 mb-4">
+                    <h6><strong>Entertainment</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Bollywood News</a></li>
+                    <li><a href="#">TV Serials</a></li>
+                    <li><a href="#">Hollywood News</a></li>
+                    <li><a href="#">Movie Reviews</a></li>
+                    <li><a href="#">Photo Gallery</a></li>
+                    <li><a href="#">Videos</a></li>
+                    <li><a href="#">Shayari</a></li>
+                    <li><a href="#">Hindi Jokes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sports & Tools -->
+                <div class="col-md-3 mb-4">
+                    <h6><strong>Sports News</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Cricket News</a></li>
+                    <li><a href="#">Live Cricket Score</a></li>
+                    <li><a href="#">Hockey</a></li>
+                    <li><a href="#">Tennis</a></li>
+                    <li><a href="#">Football</a></li>
+                    </ul>
+                    <h6 class="mt-3"><strong>Tools</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="age.html">Age Calculator</a></li>
+                    <li><a href="BMIindex.html">BMI Calculator</a></li>
+                    <li><a href="GST.html">GST Calculator</a></li>
+                    </ul>
+                </div>
+                </div>
+
+                <!-- Newsletter Subscribe -->
+                <div class="col-md-3 mb-4">
+                <h6><strong>Subscribe To Newsletter</strong></h6>
+                <form class="d-flex">
+                    <input type="email" class="form-control me-2" placeholder="Enter your email">
+                    <button class="btn btn-primary" type="submit">Subscribe</button>
+                </form>
+                </div>
+
+                <!-- App store section
+                <div class="row mt-3 mb-3">
+                <div class="col-md-3">
+                    <p><strong>Now Available</strong></p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style="width: 120px;">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" style="width: 120px;" class="mt-2">
+                </div>
+                </div> -->
+
+                <!-- Footer Bottom -->
+                <div class="row border-top pt-3 mt-3">
+                <div class="col-md-9">
+                    <small>
+                    <a href="#">About Us</a> | 
+                    <a href="#">Advertise with us</a> | 
+                    <a href="#">Careers</a> | 
+                    <a href="#">Privacy</a> | 
+                    <a href="#">Cookies Policy</a> | 
+                    <a href="#">Contact Us</a> | 
+                    <a href="#">Terms and Conditions</a> |
+                    <a href="#">Products and Services</a> | 
+                    <a href="#">RSS Feeds</a> | 
+                    <a href="#">Sitemap</a> | 
+                    <a href="#">Code of Ethics</a> | 
+                    <a href="#">Delete All Cookies</a>
+                    </small>
+                </div>
+                </div>
+            </div>            
+        </div>
+            
+            <!-- Copyright section - Full width -->
+        <div style="background-color: #013C84; width: 100%;" class="text-center text-white py-2 mt-3">
+            <div class="container">
+                &copy; 2025 Metro Link. All Rights Reserved.
+            </div>
+         </div>
+    </footer>
+
+
+<script>
+     //toggle side bar
+        function openSidebar() {
+            document.getElementById('sidebar').classList.add('open');
+            document.getElementById('sidebarOverlay').classList.add('open');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('open');
+            document.getElementById('sidebarOverlay').classList.remove('open');
+        }
+        let currentCity = 'Nagpur';
+        let currentLang = 'en';
+
+        function updateDateTime(lang = currentLang) {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit' };
+            const locale = lang === 'hi' ? 'hi-IN' : (lang === 'mr' ? 'mr-IN' : 'en-US');
+            const dateStr = now.toLocaleDateString(locale, options);
+            const timeStr = now.toLocaleTimeString(locale, timeOptions);
+            document.getElementById('datetime').textContent = `${dateStr} – ${timeStr}`;
+        }
+        async function fetchWeather() {
+            try {
+            const response = await fetch(`https://wttr.in/${currentCity}?format=%C+|+%t`);
+            const text = await response.text();
+            document.getElementById('weather').textContent = `🌤️ ${text}`;
+            } catch (error) {
+            document.getElementById('weather').textContent = '🌤️ Weather unavailable';
+            console.error('Weather fetch error:', error);
+            }
+        }
+        function toggleDropdown(id) {
+            const langDropdown = document.getElementById('langDropdown');
+            const cityDropdown = document.getElementById('cityDropdown');
+            const targetDropdown = document.getElementById(id);
+            
+            // Close other dropdown
+            if (id === 'langDropdown') {
+            cityDropdown.style.display = 'none';
+            } else {
+            langDropdown.style.display = 'none';
+            }
+            
+            // Toggle target dropdown
+            targetDropdown.style.display = targetDropdown.style.display === 'block' ? 'none' : 'block';
+        }
+        function switchLanguage(lang) {
+            currentLang = lang;
+            updateDateTime();
+            document.getElementById('langDropdown').style.display = 'none';
+            document.querySelector('.lang-option').textContent = lang.toUpperCase();
+        }
+
+        function switchCity(city) {
+            currentCity = city;
+            fetchWeather();
+            document.getElementById('cityDropdown').style.display = 'none';
+            document.querySelector('.city-option').textContent = {Nagpur: 'NG', Mumbai: 'MU', Delhi: 'DL'}[city];
+        }
+
+        // Initial load
+        updateDateTime();
+        fetchWeather();
+        // Refresh time every 30 seconds
+        setInterval(() => updateDateTime(), 30000);
+
+        // Close dropdowns on outside click
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.lang-switch')) {
+            document.getElementById('langDropdown').style.display = 'none';
+            document.getElementById('cityDropdown').style.display = 'none';
+            }
+        });
+
+
+    let currentdate = new Date();
+    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    document.getElementById('datetime').innerText = currentdate.toLocaleString('en-US', options);
+    let birthDateInput = document.getElementById('birthDate');
+    function calculateAge() {
+        let birthDate = new Date(birthDateInput.value);
+        let today = new Date();
+        if (isNaN(birthDate)) {
+            document.getElementById('result').innerText = 'Please enter a valid date.';
+            return;
+        }
+        if (birthDate > today) {
+            document.getElementById('result').innerText = 'Birth date cannot be in the future.';
+            return;
+        }
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        document.getElementById('result').innerText = `Your age is ${age} years.`;
+    }
+</script>
+</body>
+</html>

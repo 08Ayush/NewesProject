@@ -8,51 +8,57 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- <link href="style.css" rel="stylesheet"> -->
   <style>
-    /* this is for side bar */
+    /* This is for sidebar */
     .sidebar-overlay {
-    display: none;
-    position: fixed;
-    z-index: 1040;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.4);
+        display: none;
+        position: fixed;
+        z-index: 1040;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
     }
-    
-   
+
     .sidebar {
         position: fixed;
-        top: 135px; /* Set this to your header's total height */
+        top: 190px; /* Set this to your header's total height */
         left: -320px;
         width: 300px;
         height: calc(100% - 130px); /* Adjust height so it doesn't overflow */
         background: #fff;
         z-index: 1050;
-        box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
         transition: left 0.3s;
         overflow-y: auto;
+        padding: 1rem; /* Added padding for sidebar content */
     }
 
     .sidebar.open {
-    left: 0;
+        left: 0;
     }
+
     .sidebar-overlay.open {
-    display: block;
+        display: block;
     }
-    @media (max-width: 576px) {
-    
-    }
+
     .header {
-    color: white;
-    background-color: #013C84;
-    border-bottom: 1px solid #dee2e6;
-    padding: 0.75rem 1rem;
-    font-weight: 500;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+        color: white;
+        background-color: #013C84;
+        border-bottom: 1px solid #dee2e6;
+        padding: 0.75rem 1rem;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .weather, .datetime, .lang-switch {
         white-space: nowrap;
+    }
+
+    .weather, .datetime {
+        margin-right: 1rem; /* Added margin to space out header items */
     }
 
     .navbar-custom {
@@ -102,7 +108,7 @@
         background: transparent;
         border: none;
         color: white;
-    } 
+    }
 
     .hidden-nav-links {
         display: none !important;
@@ -117,11 +123,15 @@
         color: white !important;
     }
 
+    .nav-link {
+        padding: 0.5rem 1rem; /* Added padding to navigation links */
+    }
+
     marquee {
         background-color: red;
         color: white;
+        padding: 0.5rem 1rem; /* Added padding for better readability */
     }
-    
 
     /* Mid section */
     .carousel-item img {
@@ -134,10 +144,6 @@
         opacity: 1;
         transition: opacity 0.3s ease;
     }
-
-    /* .carousel-item:hover .carousel-caption {
-        opacity: 1;
-    } */
 
     .news-list img, .category-card img, .trending-card img, .entertainment-card img {
         height: 100px;
@@ -153,6 +159,7 @@
         transform: translateY(-5px);
     }
 
+    
     .carousel-control-prev, .carousel-control-next {
         background: rgba(0, 0, 0, 0.5);
         width: 50px;
@@ -172,7 +179,7 @@
         background: rgba(0, 0, 0, 0.8);
     }
 
-    .news-list-item a, .top-news-card a, .category-card a, .trending-card a, .entertainment-card a, .video-list-item a, .weekly-hots-card a, .weekly-news-card a ,.bg-light a{
+    .news-list-item a, .top-news-card a, .category-card a, .trending-card a, .entertainment-card a, .video-list-item a, .weekly-hots-card a, .weekly-news-card a, .bg-light a {
         text-decoration: none;
         color: inherit;
     }
@@ -185,7 +192,9 @@
         height: 150px;
         object-fit: cover;
     }
-
+    .category-section, .trending-section, .entertainment-section, .videos-section {
+        margin-top: 1rem;
+    }
     .category-section h3, .trending-section h3, .entertainment-section h3, .videos-section h3 {
         display: inline-block;
         margin-right: 1rem;
@@ -218,10 +227,12 @@
         width: 150px;
         object-fit: cover;
     }
-/* scroll in video-list */
+
+    /* Scroll in video-list */
     .video-list {
         max-height: 400px;
         overflow-y: auto;
+        padding: 0.5rem; /* Added padding for scrolling content */
     }
 
     .video-list-item {
@@ -241,9 +252,10 @@
         color: inherit;
     }
 
-    .weekly-hots-list, .weekly-news-list ,.news-list {
+    .weekly-hots-list, .weekly-news-list, .news-list {
         max-height: 400px;
         overflow-y: auto;
+        padding: 0.5rem; /* Added padding for scrolling content */
     }
 
     .ad-space {
@@ -254,132 +266,189 @@
         justify-content: center;
         border: 1px solid #ddd;
         border-radius: 5px;
+        padding: 1rem; /* Added padding for ad content */
+    }
+    .see-more {
+        font-size: 0.95rem;
+        color: #013C84;
+        text-decoration: underline;
+        font-weight: 500;
+        margin-left: 10px;
+        transition: color 0.2s;
+        cursor: pointer;
+    }
+
+    .see-more:hover {
+        color: #0056b3;
+        text-decoration: none;
     }
 
     /* Responsive Adjustments */
     @media (max-width: 576px) {
         /* Header */
-        .container-fluid.header {
-        display: none !important;
-        }
+        /* .container-fluid.header {
+            display: none !important;
+        } */
+
         .weather, .lang-switch {
             font-size: 0.9rem;
         }
+
         .header {
             flex-direction: column;
             align-items: flex-start;
             padding: 0.5rem 1rem;
         }
+
         .weather, .datetime, .lang-switch {
             margin-bottom: 0.5rem;
         }
+
         .datetime {
             font-size: 0.9rem;
         }
+
         /* Navigation */
         .nav-item a {
             font-size: 0.9rem !important;
         }
+
         #hindiNav {
             flex-direction: column;
             align-items: flex-start;
         }
+
         /* Marquee */
         marquee {
             font-size: 0.9rem;
-            padding: 0.5rem;
+            padding: 0.5rem; /* Adjusted padding for smaller screens */
         }
+
         /* General Typography */
         h2 {
             font-size: 1.5rem;
         }
+
         h3 {
             font-size: 1.2rem;
         }
+
         /* Fresh News */
         .carousel-item img {
             height: 200px;
         }
+
         .carousel-control-prev, .carousel-control-next {
             width: 30px;
             height: 30px;
         }
+
         .carousel-control-prev-icon, .carousel-control-next-icon {
             width: 15px;
             height: 15px;
         }
+
         .news-list img {
             height: 80px;
             width: 120px;
         }
+
         .news-list-item:hover {
             transform: none;
         }
+
         /* Top News */
         .top-news-card img {
-            height: 120px;
+            width: 100%;
+            height: 200px;  
+            object-fit: cover;
         }
+
         .top-news-card:hover {
             transform: none;
         }
+
         /* Categories and Trending */
+        .category-section , .trending-section {
+            margin-top: 1rem;
+        }
         .category-card img, .trending-card img {
             height: 80px;
             width: 120px;
         }
+
         .category-section h3, .trending-section h3 {
             font-size: 1.2rem;
         }
+
         .category-section a.see-more, .trending-section a.see-more {
             font-size: 0.8rem;
         }
+
         .category-card:hover, .trending-card:hover {
             transform: none;
         }
+
         /* Entertainment */
         .entertainment-card img {
             height: 80px;
             width: 120px;
         }
+
         .entertainment-section h3 {
             font-size: 1.2rem;
         }
+
         .entertainment-section a.see-more {
             font-size: 0.8rem;
         }
+
         .entertainment-card:hover {
             transform: none;
         }
+
         /* Videos */
         .main-video video {
             height: 200px;
         }
+
         .video-list-item video {
             height: 60px;
             width: 120px;
         }
+
         .video-list {
             max-height: 300px;
+            padding: 0.25rem; /* Reduced padding for smaller screens */
         }
+
         .videos-section h3 {
             font-size: 1.2rem;
         }
+
         .videos-section a.see-more {
             font-size: 0.8rem;
         }
+
         .video-list-item:hover {
             transform: none;
         }
+
         /* Weekly Highlights */
         .weekly-hots-list, .weekly-news-list {
             max-height: 300px;
+            padding: 0.25rem; /* Reduced padding for smaller screens */
         }
+
         .ad-space {
             height: 200px;
+            padding: 0.5rem; /* Reduced padding for smaller screens */
         }
+
         .weekly-highlights-section h2 {
             font-size: 1.5rem;
         }
+
         .weekly-hots-section h3, .weekly-news-section h3 {
             font-size: 1.2rem;
         }
@@ -390,77 +459,96 @@
         .weather, .lang-switch {
             font-size: 0.95rem;
         }
+
         /* Navigation */
         .nav-item a {
             font-size: 0.95rem !important;
         }
+
         /* Marquee */
         marquee {
             font-size: 0.95rem;
+            padding: 0.5rem 1rem; /* Maintain padding for medium screens */
         }
+
         /* General Typography */
         h2 {
             font-size: 1.8rem;
         }
+
         h3 {
             font-size: 1.4rem;
         }
+
         /* Fresh News */
         .carousel-item img {
             height: 300px;
         }
+
         .carousel-control-prev, .carousel-control-next {
             width: 40px;
             height: 40px;
         }
+
         .carousel-control-prev-icon, .carousel-control-next-icon {
             width: 20px;
             height: 20px;
         }
+
         /* Top News */
         .top-news-card img {
             height: 135px;
         }
+
         /* Categories and Trending */
         .category-card img, .trending-card img {
             height: 90px;
             width: 135px;
         }
+
         .category-section h3, .trending-section h3 {
             font-size: 1.4rem;
         }
+
         /* Entertainment */
         .entertainment-card img {
             height: 90px;
             width: 135px;
         }
+
         .entertainment-section h3 {
             font-size: 1.4rem;
         }
+
         /* Videos */
         .main-video video {
             height: 300px;
         }
+
         .video-list-item video {
             height: 80px;
             width: 150px;
         }
+
         .videos-section h3 {
             font-size: 1.4rem;
         }
+
         /* Weekly Highlights */
         .ad-space {
             height: 300px;
+            padding: 0.75rem; /* Adjusted padding for medium screens */
         }
+
         .weekly-highlights-section h2 {
             font-size: 1.8rem;
         }
+
         .weekly-hots-section h3, .weekly-news-section h3 {
             font-size: 1.4rem;
         }
-}
-        
-  </style>
+    }
+</style>
 </head>
 <body>
     <!-- Sidebar Overlay -->
@@ -562,16 +650,23 @@
         </div>
         
     </div>
-    <div class="header2 container" >
-        <img class="m1" src="media/metro.png" style="max-width: 150px;">
-
+    <div class="header2 container  d-flex align-items-center justify-content-between" >
+        <a href="home.html" class="logo-link">
+            <img class="logo" src="media/metro2.png" style="max-width: 150px;">
+        </a>
+        <button class="toggle-button btn d-block d-lg-none" type="button" onclick="openSidebar()" aria-label="Toggle Menu" style="color: #013C84;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#013C84" class="bi bi-list" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg>
+    </button>
     </div>
   <div id="header3">
   <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container d-flex justify-content-between align-items-center">
 
       <!-- Toggle Button -->
-      <button class="toggle-button btn" type="button" onclick="openSidebar()" aria-label="Toggle Menu">
+      <button class="toggle-button btn d-none d-lg-block" type="button" onclick="openSidebar()" aria-label="Toggle Menu">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-list" viewBox="0 0 16 16">
           <path fill-rule="evenodd"
             d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
@@ -650,7 +745,7 @@
                             <div class="card">
                                 <div class="row g-0">
                                     <div class="col-4">
-                                        <img src="https://via.placeholder.com/150x100?text=Politics" class="img-fluid rounded-start" alt="News Image">
+                                        <img src="https://th.bing.com/th/id/OIP.hmqowu6z6BcPe_-RoqqESQHaEK?w=294&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" class="img-fluid rounded-start" alt="News Image">
                                     </div>
                                     <div class="col-8">
                                         <div class="card-body">
@@ -667,7 +762,7 @@
                             <div class="card">
                                 <div class="row g-0">
                                     <div class="col-4">
-                                        <img src="https://via.placeholder.com/150x100?text=Politics" class="img-fluid rounded-start" alt="News Image">
+                                        <img src="https://th.bing.com/th/id/OIP.MNnugqzPBeH52tvkPggwYAHaEK?w=300&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" class="img-fluid rounded-start" alt="News Image">
                                     </div>
                                     <div class="col-8">
                                         <div class="card-body">
@@ -684,7 +779,7 @@
                             <div class="card">
                                 <div class="row g-0">
                                     <div class="col-4">
-                                        <img src="https://via.placeholder.com/150x100?text=Politics" class="img-fluid rounded-start" alt="News Image">
+                                        <img src="https://www.washingtonpost.com/resizer/2_-nHpdRqmLsKHLauFKNAYEgi6U=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/Q6SEWGE5S4I6TBOWKIIXGP4SY4.jpg" class="img-fluid rounded-start" alt="News Image">
                                     </div>
                                     <div class="col-8">
                                         <div class="card-body">
@@ -699,17 +794,18 @@
                 </div>
             </div>
         </div>
+
         <!-- Top News Section -->
-        <h2 class="mb-3"><b>टॉप न्यूज़</b></h2>
+        <h2 class="mb-3" style="margin-top: 15px;"><b>टॉप न्यूज़</b></h2>
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <!-- Row 1 -->
             <div class="col">
                 <div class="top-news-card">
-                    <a href="#topnews1">
+                    <a href="topnew1.html">
                         <div class="card h-100">
-                            <img src="https://via.placeholder.com/300x150?text=Top+News+1" class="card-img-top" alt="Top News 1">
+                            <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/1200x900/PTI06-06-2025-000091B-0_1749198474630_1749198523474.jpg" class="card-img-top" alt="Top News 1">
                             <div class="card-body">
-                                <h6 class="card-title">मध्यप्रदेश की आज की बड़ी खबरें</h6>
+                                <h6 class="card-title">आजादी से पहले का सपना, रेलमार्ग से कैसे जुड़ा जम्मू-कश्मीर; महाराजा हरि सिंह से क्या कनेक्शन</h6>
                                 <small class="text-muted">Published on 20 May 2025</small>
                             </div>
                         </div>
@@ -720,7 +816,7 @@
                 <div class="top-news-card">
                     <a href="#topnews2">
                         <div class="card h-100">
-                            <img src="https://via.placeholder.com/300x150?text=Top+News+2" class="card-img-top" alt="Top News 2">
+                            <img src="https://drop.ndtv.com/albums/NEWS/in-pics-asia-s-_638786761717445948/638786761717445948_640x480.jpeg?downsize=320:213" class="card-img-top" alt="Top News 2">
                             <div class="card-body">
                                 <h6 class="card-title">नागपुर VIO सामान्य प्री-प्लान?</h6>
                                 <small class="text-muted">Published on 20 May 2025</small>
@@ -733,9 +829,9 @@
                 <div class="top-news-card">
                     <a href="#topnews3">
                         <div class="card h-100">
-                            <img src="https://via.placeholder.com/300x150?text=Top+News+3" class="card-img-top" alt="Top News 3">
+                            <img src="https://drop.ndtv.com/albums/NEWS/in-pics-pm-modi_638765973137972991/638765973137972991_640x480.jpeg?downsize=320:213" class="card-img-top" alt="Top News 3">
                             <div class="card-body">
-                                <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल</h6>
                                 <small class="text-muted">Published on 20 May 2025</small>
                             </div>
                         </div>
@@ -746,7 +842,7 @@
                 <div class="top-news-card">
                     <a href="#topnews4">
                         <div class="card h-100">
-                            <img src="https://via.placeholder.com/300x150?text=Top+News+4" class="card-img-top" alt="Top News 4">
+                            <img src="https://drop.ndtv.com/albums/NEWS/8-budgets-8-sar_638740056404999240/638740056404999240_640x480.jpeg?downsize=320:213" class="card-img-top" alt="Top News 4">
                             <div class="card-body">
                                 <h6 class="card-title">राजस्थान बोर्ड 12वीं रिजल्ट 2025</h6>
                                 <small class="text-muted">Published on 20 May 2025</small>
@@ -760,7 +856,7 @@
                 <div class="top-news-card">
                     <a href="#topnews5">
                         <div class="card h-100">
-                            <img src="https://via.placeholder.com/300x150?text=Top+News+5" class="card-img-top" alt="Top News 5">
+                            <img src="https://drop.ndtv.com/albums/NEWS/enhancing-capab_638773031331212205/638773031331212205_640x480.jpeg?downsize=320:213" class="card-img-top" alt="Top News 5">
                             <div class="card-body">
                                 <h6 class="card-title">मध्यप्रदेश की आज की बड़ी खबरें</h6>
                                 <small class="text-muted">Published on 20 May 2025</small>
@@ -773,7 +869,7 @@
                 <div class="top-news-card">
                     <a href="#topnews6">
                         <div class="card h-100">
-                            <img src="https://via.placeholder.com/300x150?text=Top+News+6" class="card-img-top" alt="Top News 6">
+                            <img src="https://drop.ndtv.com/albums/NEWS/women-investing_638767809606417530/638767812478579596_640x480.jpeg?downsize=320:213" class="card-img-top" alt="Top News 6">
                             <div class="card-body">
                                 <h6 class="card-title">नागपुर VIO सामान्य प्री-प्लान?</h6>
                                 <small class="text-muted">Published on 20 May 2025</small>
@@ -786,9 +882,9 @@
                 <div class="top-news-card">
                     <a href="#topnews7">
                         <div class="card h-100">
-                            <img src="https://via.placeholder.com/300x150?text=Top+News+7" class="card-img-top" alt="Top News 7">
+                            <img src="https://drop.ndtv.com/albums/NEWS/ms-dhoni-s-csk-_638817011086819455/638817011086819455_640x480.jpeg?downsize=225:168" class="card-img-top" alt="Top News 7">
                             <div class="card-body">
-                                <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल</h6>
                                 <small class="text-muted">Published on 20 May 2025</small>
                             </div>
                         </div>
@@ -799,7 +895,7 @@
                 <div class="top-news-card">
                     <a href="#topnews8">
                         <div class="card h-100">
-                            <img src="https://via.placeholder.com/300x150?text=Top+News+8" class="card-img-top" alt="Top News 8">
+                            <img src="https://th.bing.com/th/id/OIF.o6CIVOTxL3YwCpmq9yyO2g?w=294&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" class="card-img-top" alt="Top News 8">
                             <div class="card-body">
                                 <h6 class="card-title">राजस्थान बोर्ड 12वीं रिजल्ट 2025</h6>
                                 <small class="text-muted">Published on 20 May 2025</small>
@@ -810,6 +906,7 @@
             </div>
         </div>
         <!-- New Section: Categories and Trending -->
+    
         <div class="row" >
             <!-- Container 1: Categories (2x2 Grid with 3 Cards Each) -->
             <div class="col-lg-8">
@@ -825,11 +922,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=Sports" class="img-fluid rounded-start" alt="Sports News">
+                                                    <img src="https://images.bhaskarassets.com/webp/thumb/256x0/web2images/521/2025/06/06/untitled-design-2025-06-06t103132989_1749186099.jpg" class="img-fluid rounded-start" alt="Sports News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                        <h6 class="card-title">गुकेश की नॉर्वे चेस टूर्नामेंट में चौथी जीत</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -841,11 +939,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=Sports" class="img-fluid rounded-start" alt="Sports News">
+                                                    <img src="https://feeds.abplive.com/onecms/images/uploaded-images/2025/06/06/be025310af74d6dec8f7d08747d94c5417491876531751212_original.jpg?impolicy=abp_cdn&imwidth=470" class="img-fluid rounded-start" alt="Sports News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                        <h6 class="card-title">इंग्लैंड रवाना हुई भारतीय टीम, स्टाइलिश दिखा शुभमन गिल और बाकी प्लेयर्स का लुक</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -857,11 +956,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=Sports" class="img-fluid rounded-start" alt="Sports News">
+                                                    <img src="https://images.tv9hindi.com/wp-content/uploads/2025/06/bengaluru-stampede-case.jpg" class="img-fluid rounded-start" alt="Sports News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                        <h6 class="card-title">RCB के लिए आई बुरी खबर, विराट कोहली का करीबी गिरफ्तार</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -882,11 +982,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=International" class="img-fluid rounded-start" alt="International News">
+                                                    <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/1200x900/Pictures-of-the-Week-Global-Photo-Gallery-4_1749186288508_1749186310154.jpg" class="img-fluid rounded-start" alt="International News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">नागपुर VIO सामान्य प्री-प्लान?</h6>
+                                                        <h6 class="card-title">चीन ने डलवाई मस्क-ट्रंप के बीच फूट? टैरिफ की मार झेल नहीं पा रहे टेस्ला के मालिक</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -898,11 +999,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=International" class="img-fluid rounded-start" alt="International News">
+                                                    <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/1200x900/PAKISTAN-INDIA-KASHMIR-UNREST-SECURITY-0_1747792758018_1749181374154.jpg" class="img-fluid rounded-start" alt="International News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">नागपुर VIO सामान्य प्री-प्लान?</h6>
+                                                        <h6 class="card-title">जल्दी-जल्दी डैम बनाओ… भारत के एक्शन से पाक का गला सूखा</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -914,11 +1016,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=International" class="img-fluid rounded-start" alt="International News">
+                                                    <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/05/1200x900/pak_1749127238829_1749127244005.jpg" class="img-fluid rounded-start" alt="International News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">नागपुर VIO सामान्य प्री-प्लान?</h6>
+                                                        <h6 class="card-title">कौन है ISI की ‘मैडम N’? जिसने पाक के इशारे पर भारत में बिछाया 500 जासूसों का जाल</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -939,11 +1042,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=Business" class="img-fluid rounded-start" alt="Business News">
+                                                    <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/PTI06-04-2024-000127B-0_1719369248199_1749182157129.jpg" class="img-fluid rounded-start" alt="Business News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                        <h6 class="card-title">RBI ने दी आम आदमी को बड़ी राहत, 50 बेसिस प्वाइंट घटाया रेपो रेट, GDP को लेकर क्या अनुमान?</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -955,11 +1059,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=Business" class="img-fluid rounded-start" alt="Business News">
+                                                    <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/Multibagger_Stock_1749190236727_1749190246194.jpg" class="img-fluid rounded-start" alt="Business News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                        <h6 class="card-title">एक महीने में 200% उछला यह शेयर, 99 रुपये पर आया IPO, अब 300 रुपये के पार दाम</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -971,11 +1076,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=Business" class="img-fluid rounded-start" alt="Business News">
+                                                    <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/Sanjay_malhotra_RBI_Governer__1749182761262_1749182761439.jpeg" class="img-fluid rounded-start" alt="Business News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                        <h6 class="card-title">RBI ने दी आम आदमी को बड़ी राहत, 50 बेसिस प्वाइंट घटाया रेपो रेट, GDP को लेकर क्या अनुमान?</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -996,11 +1102,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=Technologies" class="img-fluid rounded-start" alt="Technologies News">
+                                                    <img src="https://www.livehindustan.com/lh-img/smart/img/2025/01/17/256x144/Mahones_1737122312516_1737122368388.jpg" class="img-fluid rounded-start" alt="Technologies News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                        <h6 class="card-title">महाकुंभ 2025: यूज हो रही लेटेस्ट AI और VR टेक्नोलॉजी, तस्वीरों में देखें क्या है खास</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1012,11 +1119,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=Technologies" class="img-fluid rounded-start" alt="Technologies News">
+                                                    <img src="https://images1.livehindustan.com/uploadimage/library/2021/07/21/16_9/16_9_4/oppo_a16_has_strong_battery_with_great_features_know_the_priceand_specificatons_1626852119.jpg" class="img-fluid rounded-start" alt="Technologies News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                        <h6 class="card-title"> दमदार बैटरी के साथ Oppo A16 में हैं शानदार फीचर्स, जानें कीमत</h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1028,11 +1136,12 @@
                                         <div class="card">
                                             <div class="row g-0">
                                                 <div class="col-4">
-                                                    <img src="https://via.placeholder.com/150x100?text=Technologies" class="img-fluid rounded-start" alt="Technologies News">
+                                                    <img src="https://images1.livehindustan.com/uploadimage/library/2021/10/01/16_9/16_9_4/share_market_ipo_1633088297.jpeg" class="img-fluid rounded-start" alt="Technologies News">
                                                 </div>
                                                 <div class="col-8">
                                                     <div class="card-body">
-                                                        <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                        <h6 class="card-title">इस साल इन 5 कंपनियों के IPO ने निवेशकों को किया मालामाल </h6>
+                                                        <small class="text-muted">Published on 25 May 2025</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1056,11 +1165,13 @@
                                 <div class="card">
                                     <div class="row g-0">
                                         <div class="col-4">
-                                            <img src="https://via.placeholder.com/150x100?text=Trending" class="img-fluid rounded-start" alt="Trending News">
+                                            <img src="https://www.livehindustan.com/lh-img/smart/img/2025/05/29/1200x900/child_snake_viral_video_1748532258454_1748532268822.jpg" class="img-fluid rounded-start" alt="Trending News">
                                         </div>
                                         <div class="col-8">
                                             <div class="card-body">
-                                                <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                <h6 class="card-title">न फुफकारा, न डंसा... सांप को थप्पड़ मारता रहा बच्चा, वायरल हो रहा VIDEO कर देगा हैरान</h6>
+                                                <small class="text-muted">Published on 25 May 2025</small>
+                                        
                                             </div>
                                         </div>
                                     </div>
@@ -1072,11 +1183,12 @@
                                 <div class="card">
                                     <div class="row g-0">
                                         <div class="col-4">
-                                            <img src="https://via.placeholder.com/150x100?text=Trending" class="img-fluid rounded-start" alt="Trending News">
+                                            <img src="https://www.livehindustan.com/lh-img/smart/img/2025/05/29/256x144/new_york_wedding_video_1748516996506_1748517016116.jpg" class="img-fluid rounded-start" alt="Trending News">
                                         </div>
                                         <div class="col-8">
                                             <div class="card-body">
-                                                <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                <h6 class="card-title">देसी गानों से झूम उठा न्यू यॉर्क का मशहूर वॉल स्ट्रीट, 400 बारातियों ने मचा दिया धमाल; VIDEO</h6>
+                                                <small class="text-muted">Published on 25 May 2025</small>
                                             </div>
                                         </div>
                                     </div>
@@ -1088,11 +1200,12 @@
                                 <div class="card">
                                     <div class="row g-0">
                                         <div class="col-4">
-                                            <img src="https://via.placeholder.com/150x100?text=Trending" class="img-fluid rounded-start" alt="Trending News">
+                                            <img src="https://www.livehindustan.com/lh-img/smart/img/2025/05/24/256x144/a_driver_dies_of_a_heart_attack_1748089711069_1748089730985.jpeg" class="img-fluid rounded-start" alt="Trending News">
                                         </div>
                                         <div class="col-8">
                                             <div class="card-body">
-                                                <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                <h6 class="card-title">चलती बस में हार्ट अटैक से ड्राइवर की मौत, सवार थे 40 यात्री; फिर जो हुआ...</h6>
+                                                <small class="text-muted">Published on 25 May 2025</small>
                                             </div>
                                         </div>
                                     </div>
@@ -1104,11 +1217,12 @@
                                 <div class="card">
                                     <div class="row g-0">
                                         <div class="col-4">
-                                            <img src="https://via.placeholder.com/150x100?text=Trending" class="img-fluid rounded-start" alt="Trending News">
+                                            <img src="https://www.livehindustan.com/lh-img/smart/img/2025/05/14/256x144/Prabhas_back_shot_in_Salaar_1747191886458_1747191891049.jpg" class="img-fluid rounded-start" alt="Trending News">
                                         </div>
                                         <div class="col-8">
                                             <div class="card-body">
-                                                <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                <h6 class="card-title">ओटीटी पर रिलीज के 450 दिन बाद भी जलवा कायम, टॉप 10 की लिस्ट से उतर ही नहीं रही</h6>
+                                                <small class="text-muted">Published on 25 May 2025</small>
                                             </div>
                                         </div>
                                     </div>
@@ -1120,11 +1234,12 @@
                                 <div class="card">
                                     <div class="row g-0">
                                         <div class="col-4">
-                                            <img src="https://via.placeholder.com/150x100?text=Trending" class="img-fluid rounded-start" alt="Trending News">
+                                            <img src="https://www.livehindustan.com/lh-img/smart/img/2025/05/01/256x144/dfd_1746084565345_1746084572814.jpg" class="img-fluid rounded-start" alt="Trending News">
                                         </div>
                                         <div class="col-8">
                                             <div class="card-body">
-                                                <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
+                                                <h6 class="card-title">आपकी चटपटी क्रेविंग को दूर कर सकती हैं अमृतसरी पनीर भुर्जी की ये रेसिपी, नोट करें बनाने का तरीका</h6>
+                                                <small class="text-muted">Published on 25 May 2025</small>
                                             </div>
                                         </div>
                                     </div>
@@ -1148,11 +1263,12 @@
                                     <div class="card">
                                         <div class="row g-0">
                                             <div class="col-4">
-                                                <img src="https://via.placeholder.com/150x100?text=Entertainment" class="img-fluid rounded-start" alt="Entertainment News">
+                                                <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/MixCollage-06-Jun-2025-12-17-PM-8854_1749192431784_1749192441171.jpg" class="img-fluid rounded-start" alt="Entertainment News">
                                             </div>
                                             <div class="col-8">
                                                 <div class="card-body">
-                                                    <h6 class="card-title">नई बॉलीवुड फिल्म की रिलीज डेट घोषित</h6>
+                                                    <h6 class="card-title">फिल्म में साथ काम नहीं करने पर विद्या बालन पर भड़के थे अक्षय, एक्ट्रेस ने जॉन से कहा- मुझे बचा लो</h6>
+                                                    <small class="text-muted">Published on 25 May 2025</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -1167,11 +1283,12 @@
                                     <div class="card">
                                         <div class="row g-0">
                                             <div class="col-4">
-                                                <img src="https://via.placeholder.com/150x100?text=Entertainment" class="img-fluid rounded-start" alt="Entertainment News">
+                                                <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/amitabh_abhishek_laal_pari_1749188068301_1749188079871.png" class="img-fluid rounded-start" alt="Entertainment News">
                                             </div>
                                             <div class="col-8">
                                                 <div class="card-body">
-                                                    <h6 class="card-title">टीवी सीरियल की नई कहानी ने मचाया धमाल</h6>
+                                                    <h6 class="card-title">अभिषेक बच्चन ने किया नोरा फतेही का ‘हाय गर्मी’ स्टेप, पिता अमिताभ बोले- मजेदार</h6>
+                                                    <small class="text-muted">Published on 25 May 2025</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -1186,11 +1303,12 @@
                                     <div class="card">
                                         <div class="row g-0">
                                             <div class="col-4">
-                                                <img src="https://via.placeholder.com/150x100?text=Entertainment" class="img-fluid rounded-start" alt="Entertainment News">
+                                                <img src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/housefull_5_india_1749192091144_1749192094675.png" class="img-fluid rounded-start" alt="Entertainment News">
                                             </div>
                                             <div class="col-8">
                                                 <div class="card-body">
-                                                    <h6 class="card-title">मशहूर सिंगर का नया गाना रिलीज</h6>
+                                                    <h6 class="card-title">Twitter Review: हाउसफुल 5 है थ्रिल और कॉमेडी का परफेक्ट मिक्स, लोगों ने अक्षय कुमार को कहा कॉमेडी किंग</h6>
+                                                    <small class="text-muted">Published on 25 May 2025</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -1312,13 +1430,14 @@
                         <div class="col-lg-4">
                             <div class="weekly-hots-section">
                                 <h3>इस सप्ताह के हॉट्स</h3>
+                                <a href="#" class="see-more">See More</a>
                                 <div class="weekly-hots-list mt-2">
                                     <div class="weekly-hots-card mb-3">
                                         <a href="#weeklyhot1">
                                             <div class="card">
                                                 <div class="row g-0">
                                                     <div class="col-4">
-                                                        <img src="https://via.placeholder.com/150x100?text=Weekly+Hot+1" class="img-fluid rounded-start" alt="Weekly Hot 1">
+                                                        <img src="https://www.eventfaqs.com/uploads/news/content/untitled-design---2023-12-18t133410.080.jpg" class="img-fluid rounded-start" alt="Weekly Hot 1">
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="card-body">
@@ -1335,7 +1454,7 @@
                                             <div class="card">
                                                 <div class="row g-0">
                                                     <div class="col-4">
-                                                        <img src="https://via.placeholder.com/150x100?text=Weekly+Hot+2" class="img-fluid rounded-start" alt="Weekly Hot 2">
+                                                        <img src="https://akm-img-a-in.tosshub.com/aajtak/images/story/202309/metro_new-sixteen_nine.jpg?size=948:533" class="img-fluid rounded-start" alt="Weekly Hot 2">
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="card-body">
@@ -1352,7 +1471,7 @@
                                             <div class="card">
                                                 <div class="row g-0">
                                                     <div class="col-4">
-                                                        <img src="https://via.placeholder.com/150x100?text=Weekly+Hot+3" class="img-fluid rounded-start" alt="Weekly Hot 3">
+                                                        <img src="https://c.ndtvimg.com/2024-02/1aj5a1qg_jeet-adani_625x300_27_February_24.jpeg?downsize=773:435" class="img-fluid rounded-start" alt="Weekly Hot 3">
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="card-body">
@@ -1369,7 +1488,7 @@
                                             <div class="card">
                                                 <div class="row g-0">
                                                     <div class="col-4">
-                                                        <img src="https://via.placeholder.com/150x100?text=Weekly+Hot+4" class="img-fluid rounded-start" alt="Weekly Hot 4">
+                                                        <img src="https://th.bing.com/th/id/OSK.HERO4tZLD9ltl7QzOOyD9mIjxiUmvzVDSAuhiI1A0nRWJL4?w=472&h=280&c=1&rs=2&o=6&cb=thwsc1&dpr=1.3&pid=SANGAM" class="img-fluid rounded-start" alt="Weekly Hot 4">
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="card-body">
@@ -1396,7 +1515,7 @@
                                             <div class="card">
                                                 <div class="row g-0">
                                                     <div class="col-4">
-                                                        <img src="https://via.placeholder.com/150x100?text=Weekly+News+1" class="img-fluid rounded-start" alt="Weekly News 1">
+                                                        <img src="https://etvbharatimages.akamaized.net/etvbharat/prod-images/15-04-2025/1200-675-23966333-thumbnail-16x9-ppjpg.jpg??imwidth=3840" class="img-fluid rounded-start" alt="Weekly News 1">
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="card-body">
@@ -1413,7 +1532,7 @@
                                             <div class="card">
                                                 <div class="row g-0">
                                                     <div class="col-4">
-                                                        <img src="https://via.placeholder.com/150x100?text=Weekly+News+2" class="img-fluid rounded-start" alt="Weekly News 2">
+                                                        <img src="https://www.prabhatkhabar.com/wp-content/uploads/2024/05/Kolkata-Metro.jpg" class="img-fluid rounded-start" alt="Weekly News 2">
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="card-body">
@@ -1430,7 +1549,7 @@
                                             <div class="card">
                                                 <div class="row g-0">
                                                     <div class="col-4">
-                                                        <img src="https://via.placeholder.com/150x100?text=Weekly+News+3" class="img-fluid rounded-start" alt="Weekly News 3">
+                                                        <img src="https://th.bing.com/th/id/OIP.mShqVBioo5VuGLcDj4T1FwHaDt?w=333&h=175&c=7&r=0&o=5&dpr=1.3&pid=1.7" class="img-fluid rounded-start" alt="Weekly News 3">
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="card-body">
@@ -1447,7 +1566,7 @@
                                             <div class="card">
                                                 <div class="row g-0">
                                                     <div class="col-4">
-                                                        <img src="https://via.placeholder.com/150x100?text=Weekly+News+4" class="img-fluid rounded-start" alt="Weekly News 4">
+                                                        <img src="https://indianexpress.com/wp-content/uploads/2015/06/smart-city1.jpg" class="img-fluid rounded-start" alt="Weekly News 4">
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="card-body">
@@ -1478,127 +1597,127 @@
         </div>
     </div>
   </div>
-    <!-- Footer Section -->
-    <footer class="bg-light pt-4">
-        <div class="container">
-            <div class="row">
-            <!-- Logo & Contact Info -->
-            <div class="col-md-3 mb-4">
-                <img src="media/metro.png" alt="Metro Link Live" style="max-width: 150px;">
-                <p class="mt-3 mb-1"><strong>LIVE NEWS</strong><br>Metro Link</p>
-                <P class = "mt-3 mb-1" style="font-size: 15px;">RNI Regd.No MAHMUL03198/13/1/2013-TC</P>
-                <p><strong>Follow Us</strong></p>
+        <!-- Footer Section -->
+        <footer class="bg-light pt-4">
+            <div class="container">
+                <div class="row">
+                <!-- Logo & Contact Info -->
+                <div class="col-md-3 mb-4">
+                    <img src="media/metro.png" alt="Metro Link Live" style="max-width: 150px;">
+                    <p class="mt-3 mb-1"><strong>LIVE NEWS</strong><br>Metro Link</p>
+                    <P class = "mt-3 mb-1" style="font-size: 15px;">RNI Regd.No MAHMUL03198/13/1/2013-TC</P>
+                    <p><strong>Follow Us</strong></p>
+                </div>
+
+                <!-- News Columns -->
+                <div class="col-md-2 mb-4">
+                    <h6><strong>News From Indian States</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Maharashtra News</a></li>
+                    <li><a href="#">Madhya Pradesh News</a></li>
+                    <li><a href="#">Delhi News</a></li>
+                    </ul>
+                    <h6><strong>Technology</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Artificial intelligence</a></li>
+                    <li><a href="#">Cryptography</a></li>
+                    <li><a href="#">Cyber Security</a></li>
+                    </ul>
+                </div>
+
+                <!-- Lifestyle -->
+                <div class="col-md-2 mb-4">
+                    <h6><strong>Lifestyle</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Health News</a></li>
+                    <li><a href="#">Fitness News</a></li>
+                    <li><a href="#">Fashion News</a></li>
+                    <li><a href="#">Spirituality</a></li>
+                    <li><a href="#">Astrology</a></li>
+                    <li><a href="#">Daily Horoscope</a></li>
+                    <li><a href="#">Astrology Predictions</a></li>
+                    <li><a href="#">Astrologers</a></li>
+                    <li><a href="#">Pujas</a></li>
+                    </ul>
+                </div>
+
+                <!-- Entertainment -->
+                <div class="col-md-2 mb-4">
+                    <h6><strong>Entertainment</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Bollywood News</a></li>
+                    <li><a href="#">TV Serials</a></li>
+                    <li><a href="#">Hollywood News</a></li>
+                    <li><a href="#">Movie Reviews</a></li>
+                    <li><a href="#">Photo Gallery</a></li>
+                    <li><a href="#">Videos</a></li>
+                    <li><a href="#">Shayari</a></li>
+                    <li><a href="#">Hindi Jokes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sports & Tools -->
+                <div class="col-md-3 mb-4">
+                    <h6><strong>Sports News</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="#">Cricket News</a></li>
+                    <li><a href="#">Live Cricket Score</a></li>
+                    <li><a href="#">Hockey</a></li>
+                    <li><a href="#">Tennis</a></li>
+                    <li><a href="#">Football</a></li>
+                    </ul>
+                    <h6 class="mt-3"><strong>Tools</strong></h6>
+                    <ul class="list-unstyled small">
+                    <li><a href="age.html">Age Calculator</a></li>
+                    <li><a href="#">BMI Calculator</a></li>
+                    <li><a href="#">Income Tax Calculator</a></li>
+                    </ul>
+                </div>
+                </div>
+
+                <!-- Newsletter Subscribe -->
+                <div class="col-md-3 mb-4">
+                <h6><strong>Subscribe To Newsletter</strong></h6>
+                <form class="d-flex">
+                    <input type="email" class="form-control me-2" placeholder="Enter your email">
+                    <button class="btn btn-primary" type="submit">Subscribe</button>
+                </form>
+                </div>
+
+                <!-- App store section
+                <div class="row mt-3 mb-3">
+                <div class="col-md-3">
+                    <p><strong>Now Available</strong></p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style="width: 120px;">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" style="width: 120px;" class="mt-2">
+                </div>
+                </div> -->
+
+                <!-- Footer Bottom -->
+                <div class="row border-top pt-3 mt-3">
+                <div class="col-md-9">
+                    <small>
+                    <a href="#">About Us</a> | 
+                    <a href="#">Advertise with us</a> | 
+                    <a href="#">Careers</a> | 
+                    <a href="#">Privacy</a> | 
+                    <a href="#">Cookies Policy</a> | 
+                    <a href="#">Contact Us</a> | 
+                    <a href="#">Terms and Conditions</a> |
+                    <a href="#">Products and Services</a> | 
+                    <a href="#">RSS Feeds</a> | 
+                    <a href="#">Sitemap</a> | 
+                    <a href="#">Code of Ethics</a> | 
+                    <a href="#">Delete All Cookies</a>
+                    </small>
+                </div>
+                </div>
             </div>
 
-            <!-- News Columns -->
-            <div class="col-md-2 mb-4">
-                <h6><strong>News From Indian States</strong></h6>
-                <ul class="list-unstyled small">
-                <li><a href="#">Maharashtra News</a></li>
-                <li><a href="#">Madhya Pradesh News</a></li>
-                <li><a href="#">Delhi News</a></li>
-                </ul>
-                <h6><strong>Technology</strong></h6>
-                <ul class="list-unstyled small">
-                <li><a href="#">Artificial intelligence</a></li>
-                <li><a href="#">Cryptography</a></li>
-                <li><a href="#">Cyber Security</a></li>
-                </ul>
+            <div style="background-color: #013C84;" class="text-center text-white py-2 mt-3">
+                &copy; 2025 Metro Link. All Rights Reserved.
             </div>
-
-            <!-- Lifestyle -->
-            <div class="col-md-2 mb-4">
-                <h6><strong>Lifestyle</strong></h6>
-                <ul class="list-unstyled small">
-                <li><a href="#">Health News</a></li>
-                <li><a href="#">Fitness News</a></li>
-                <li><a href="#">Fashion News</a></li>
-                <li><a href="#">Spirituality</a></li>
-                <li><a href="#">Astrology</a></li>
-                <li><a href="#">Daily Horoscope</a></li>
-                <li><a href="#">Astrology Predictions</a></li>
-                <li><a href="#">Astrologers</a></li>
-                <li><a href="#">Pujas</a></li>
-                </ul>
-            </div>
-
-            <!-- Entertainment -->
-            <div class="col-md-2 mb-4">
-                <h6><strong>Entertainment</strong></h6>
-                <ul class="list-unstyled small">
-                <li><a href="#">Bollywood News</a></li>
-                <li><a href="#">TV Serials</a></li>
-                <li><a href="#">Hollywood News</a></li>
-                <li><a href="#">Movie Reviews</a></li>
-                <li><a href="#">Photo Gallery</a></li>
-                <li><a href="#">Videos</a></li>
-                <li><a href="#">Shayari</a></li>
-                <li><a href="#">Hindi Jokes</a></li>
-                </ul>
-            </div>
-
-            <!-- Sports & Tools -->
-            <div class="col-md-3 mb-4">
-                <h6><strong>Sports News</strong></h6>
-                <ul class="list-unstyled small">
-                <li><a href="#">Cricket News</a></li>
-                <li><a href="#">Live Cricket Score</a></li>
-                <li><a href="#">Hockey</a></li>
-                <li><a href="#">Tennis</a></li>
-                <li><a href="#">Football</a></li>
-                </ul>
-                <h6 class="mt-3"><strong>Tools</strong></h6>
-                <ul class="list-unstyled small">
-                <li><a href="age.html">Age Calculator</a></li>
-                <li><a href="#">BMI Calculator</a></li>
-                <li><a href="#">Income Tax Calculator</a></li>
-                </ul>
-            </div>
-            </div>
-
-            <!-- Newsletter Subscribe -->
-            <div class="col-md-3 mb-4">
-            <h6><strong>Subscribe To Newsletter</strong></h6>
-            <form class="d-flex">
-                <input type="email" class="form-control me-2" placeholder="Enter your email">
-                <button class="btn btn-primary" type="submit">Subscribe</button>
-            </form>
-            </div>
-
-            <!-- App store section
-            <div class="row mt-3 mb-3">
-            <div class="col-md-3">
-                <p><strong>Now Available</strong></p>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style="width: 120px;">
-                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" style="width: 120px;" class="mt-2">
-            </div>
-            </div> -->
-
-            <!-- Footer Bottom -->
-            <div class="row border-top pt-3 mt-3">
-            <div class="col-md-9">
-                <small>
-                <a href="#">About Us</a> | 
-                <a href="#">Advertise with us</a> | 
-                <a href="#">Careers</a> | 
-                <a href="#">Privacy</a> | 
-                <a href="#">Cookies Policy</a> | 
-                <a href="#">Contact Us</a> | 
-                <a href="#">Terms and Conditions</a> |
-                <a href="#">Products and Services</a> | 
-                <a href="#">RSS Feeds</a> | 
-                <a href="#">Sitemap</a> | 
-                <a href="#">Code of Ethics</a> | 
-                <a href="#">Delete All Cookies</a>
-                </small>
-            </div>
-            </div>
-        </div>
-
-        <div style="background-color: #013C84;" class="text-center text-white py-2 mt-3">
-            &copy; 2025 Metro Link. All Rights Reserved.
-        </div>
-</footer>
+    </footer>
 
 
 
@@ -1665,7 +1784,7 @@
     currentCity = city;
     fetchWeather();
     document.getElementById('cityDropdown').style.display = 'none';
-    document.querySelector('.city-option').textContent = {Nagpur: 'NG', Mumbai: 'MU', Delhi: 'DL'}[city];
+    document.querySelector('.city-option').textContent = {Nagpur: 'NG', Mumbai: 'MU', Delhi: 'DL',Pune : 'PN', Aurangabad: 'AU',Nashik : 'NA'}[city];
   }
 
   // Initial load

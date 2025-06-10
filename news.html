@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="media\metro2.png">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title></title>
+    <style>
+        .header {
+    color: white;
+    background-color: #013C84;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .weather, .datetime, .lang-switch {
+        white-space: nowrap;
+    }
+
+    .navbar-custom {
+        background-color: #013C84;
+    }
+
+    .lang-switch a {
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        margin: 0 5px;
+    }
+
+    .lang-switch a:hover {
+        text-decoration: underline;
+    }
+
+    .dropdown-menu-custom {
+        display: none;
+        position: absolute;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px 10px;
+        z-index: 1000;
+        top: 100%;
+        min-width: 120px;
+        right: 0;
+    }
+
+    .dropdown-menu-custom a {
+        display: block;
+        padding: 5px 8px;
+        color: #000;
+        text-decoration: none;
+    }
+
+    .dropdown-menu-custom a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .header3 {
+        background-color: #013C84;
+    }
+
+    .toggle-button {
+        background: transparent;
+        border: none;
+        color: white;
+    }
+
+    .hidden-nav-links {
+        display: none !important;
+    }
+
+    #hindiNav {
+        flex-grow: 1;
+        display: flex;
+    }
+
+    .nav-item a {
+        color: white !important;
+    }
+      
+
+    .card {
+        margin-bottom: 20px;
+    }
+    .card img {
+        max-height: 300px;
+        object-fit: cover;
+    }
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .card-text {
+        font-size: 1rem;
+        color: #555;
+    }
+    
+    </style>
+</head>
+<body>
+    <header>
+    <div class="container-fluid header ">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="weather" id="weather">
+            🌤️ Loading...
+        </div>
+        <div class="datetime text-center " id="datetime">
+            <!-- JavaScript fills this -->
+        </div>
+        <div class="lang-switch text-end position-relative">
+            <span>
+            <a class="lang-option" onclick="toggleDropdown('langDropdown')">EN</a> |
+            <a class="city-option" onclick="toggleDropdown('cityDropdown')">NG</a>
+            </span>
+
+            <!-- Language Dropdown -->
+            <div id="langDropdown" class="dropdown-menu-custom">
+            <a href="#" onclick="switchLanguage('en')">English</a>
+            <a href="#" onclick="switchLanguage('hi')">Hindi</a>
+            <a href="#" onclick="switchLanguage('mr')">Marathi</a>
+            </div>
+
+            <!-- City Dropdown -->
+            <div id="cityDropdown" class="dropdown-menu-custom">
+
+                <a href="#" onclick="switchCity('Aurangabad')">Aurangabad</a>
+                <a href="#" onclick="switchCity('Nagpur')">Nagpur</a>
+                <a href="#" onclick="switchCity('Nashik')">Nashik</a>
+                <a href="#" onclick="switchCity('Mumbai')">Mumbai</a>
+                <!-- <a href="#" onclick="switchCity('Delhi')">Delhi</a> -->
+                <a href="#" onclick="switchCity('Pune')">Pune</a>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+    <div class="header2 container" >
+        <a href="home.html" class="logo-link">
+            <img class="logo" src="media/metro2.png" style="max-width: 150px;">
+        </a>
+    </div>
+  <div id="header3">
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <!-- Toggle Button -->
+      <button class="toggle-button btn" type="button" onclick="openSidebar()" aria-label="Toggle Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg>
+      </button>
+
+      <!-- Nav Items -->
+      <div id="hindiNav" class="overflow-auto w-100 ms-3">
+        <ul class="navbar-nav flex-row flex-nowrap">
+          <li class="nav-item me-3"><a class="nav-link" href="#">होम</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">देश</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">शहर और राज्य</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">मनोरंजन</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">क्रिकेट</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">ज्योतिष</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">और भी...</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</div>
+
+</header>
+<!-- Main Content Section -->
+<div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <!-- Headline -->
+      <h1 class="fw-bold mb-3">ACB summons Sisodia, Jain in case linked to construction of classrooms</h1>
+      <hr>
+      <!-- Subheadline -->
+      <p class="lead mb-2">
+        On April 30, the ACB had registered an FIR against the two AAP leaders in connection with alleged corruption in the construction of 12,748 classrooms or semi-permanent structures during the previous AAP government’s tenure.
+      </p>
+      <!-- Meta Info -->
+      <div class="d-flex align-items-center mb-3 small text-muted">
+        <span class="me-3"><strong>Written by:</strong> Sakshi Chand</span>
+        <span class="me-3">New Delhi | Updated: June 4, 2025 08:03 IST</span>
+        <span class="me-3">3 min read</span>
+      </div>
+      <!-- Share Buttons -->
+      <div class="mb-3">
+        <button class="btn btn-outline-secondary btn-sm me-2" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),'_blank')">
+          <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/facebook.svg" alt="Facebook" width="18"> Share
+        </button>
+        <button class="btn btn-outline-secondary btn-sm me-2" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href),'_blank')">
+          <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/twitter-x.svg" alt="X" width="18"> Tweet
+        </button>
+        <button class="btn btn-outline-secondary btn-sm me-2" onclick="window.open('https://wa.me/?text='+encodeURIComponent(window.location.href),'_blank')">
+          <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/whatsapp.svg" alt="WhatsApp" width="18"> WhatsApp
+        </button>
+        <button class="btn btn-outline-secondary btn-sm" onclick="navigator.clipboard.writeText(window.location.href)">
+          <img src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/icons/link-45deg.svg" alt="Copy Link" width="18"> Copy Link
+        </button>
+      </div>
+      <!-- Main News Image -->
+      <img src="https://images.indianexpress.com/2025/06/Manish-3col.jpg?w=640" class="img-fluid rounded mb-2" alt="News Image">
+      <div class="text-muted small mb-4">AAP leader Manish Sisodia (PTI Photo)</div>
+      <!-- News Content -->
+      <p>
+        THE ANTI-CORRUPTION Branch (ACB) of Delhi government on Tuesday issued summonses to former AAP ministers Manish Sisodia and Satyendar Jain over alleged corruption to the tune of Rs 2,000 crore in the construction of classrooms in government schools when their party was in power.
+      </p>
+      <p>
+        On April 30, the ACB had registered an FIR against the two AAP leaders in connection with alleged corruption in the construction of 12,748 classrooms or semi-permanent structures during the previous AAP government’s tenure.
+      </p>
+      <p>
+        While Sisodia held the finance and education portfolios in the AAP government, Jain was the minister of health, industries, power, home, urban development, and PWD.
+      </p>
+      <p>Following the summonses, AAP said in a statement, “This is not a scam by any stretch — it’s a calculated political ploy by the BJP. They are weaponizing institutions to attack AAP leaders and create a false narrative… When Aam Aadmi Party held power in Delhi, the BJP systematically defanged the ACB to strip it of any real authority. Today, they are using the same weakened institution as a tool to target AAP leaders and further their own agenda.”</p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer Section -->
+
+<footer class="bg-light pt-4">
+  <div class="container">
+    <div class="row">
+      <!-- Logo & Contact Info -->
+      <div class="col-md-3 mb-4">
+        <img src="media\metro.png" alt="Metro Link Live" style="max-width: 150px;">
+        <p class="mt-3 mb-1"><strong>LIVE NEWS</strong><br>Metro Link<br>0000000000 /0000000</p>
+        <p><strong>Follow Us</strong></p>
+      </div>
+
+      <!-- News Columns -->
+      <div class="col-md-2 mb-4">
+        <h6><strong>News From Indian States</strong></h6>
+        <ul class="list-unstyled small">
+          <li>Maharashtra News</li>
+          <li>Madhya Pradesh News</li>
+          <li>Delhi News</li>
+        </ul>
+        <h6><strong>Technology</strong></h6>
+        <ul class="list-unstyled small">
+            <li>Artificial intelligence</li> 
+            <li>Cryptogrphy</li>
+            <li>Cyber Security</li>
+                  
+        </ul>
+      </div>
+
+      <!-- Lifestyle -->
+      <div class="col-md-2 mb-4">
+        <h6><strong>Lifestyle</strong></h6>
+        <ul class="list-unstyled small">
+          <li>Health News</li>
+          <li>Fitness News</li>
+          <li>Fashion News</li>
+          <li>Spirituality</li>
+          <li>Astrology</li>
+          <li>Daily Horoscope</li>
+          <li>Astrology Predictions</li>
+          <li>Astrologers</li>
+          <li>Pujas</li>
+        </ul>
+      </div>
+
+      <!-- Entertainment -->
+      <div class="col-md-2 mb-4">
+        <h6><strong>Entertainment</strong></h6>
+        <ul class="list-unstyled small">
+          <li>Bollywood News</li>
+          <li>TV Serials</li>
+          <li>Hollywood News</li>
+          <li>Movie Reviews</li>
+          <li>Photo Gallery</li>
+          <li>Videos</li>
+          <li>Shayari</li>
+          <li>Hindi Jokes</li>
+        </ul>
+      </div>
+
+      <!-- Sports & Tools -->
+      <div class="col-md-3 mb-4">
+        <h6><strong>Sports News</strong></h6>
+        <ul class="list-unstyled small">
+          <li>Cricket News</li>
+          <li>Live Cricket Score</li>
+          <li>Hockey</li>
+          <li>Tennis</li>
+          <li>Football</li>
+        </ul>
+        <h6 class="mt-3"><strong>Tools</strong></h6>
+        <ul class="list-unstyled small">
+          <li>
+            <a class="nav-link" href="#">Age Calculator</a>
+          </li>
+          <li>BMI Calculator</li>
+          <li>Income Tax Calculator</li>
+        </ul>
+      </div>
+    </div>
+    <!-- news letter Subscribe -->
+    <div class="col-md-3 mb-4">
+        <h6><strong>Subscribe To Newsletter</strong></h6>
+        <form class="d-flex">
+          <input type="email" class="form-control me-2" placeholder="Enter your email">
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+    </div>
+
+
+    <!-- App store section -->
+    <div class="row mt-3 mb-3">
+      <div class="col-md-3">
+        <p><strong>Now Available</strong></p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style="width: 120px;">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" style="width: 120px;" class="mt-2">
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="row border-top pt-3 mt-3">
+      <div class="col-md-9">
+        <small>
+          About Us | Advertise with us | Careers | Privacy | Cookies Policy | Contact Us | Terms and Conditions |
+          Products and Services | RSS Feeds | Sitemap | Code of Ethics | Delete All Cookies
+        </small>
+      </div>
+      
+    </div>
+  </div>
+   <div style="background-color: #013C84;" class="text-center text-white py-2 mt-3">
+    &copy; 2025 Metro Link. All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+
+    
+    let currentdate = new Date();
+    let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    document.getElementById('datetime').innerText = currentdate.toLocaleString('en-US', options);
+    let birthDateInput = document.getElementById('birthDate');
+    function calculateAge() {
+        let birthDate = new Date(birthDateInput.value);
+        if (isNaN(birthDate)) {
+            document.getElementById('result').innerText = 'Please enter a valid date.';
+            return;
+        }
+        let today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        let monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        document.getElementById('result').innerText = `Your age is ${age} years.`;
+    }
+</script>
+</body>
+</html>
