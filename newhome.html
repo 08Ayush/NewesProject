@@ -6,885 +6,8 @@
   <link rel="icon" type="image/x-icon" href="media\metro2.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-  <link href="style.css" rel="stylesheet"> 
+  <link href="homestyle.css" rel="stylesheet"> 
   
-  <style>
-    /* This is for sidebar */
-    .sidebar-overlay {
-        display: none;
-        position: fixed;
-        z-index: 1040;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.4);
-    }
-
-    .sidebar {
-        position: fixed;
-        top: 190px; /* Set this to your header's total height */
-        left: -320px;
-        width: 300px;
-        height: calc(100% - 130px); /* Adjust height so it doesn't overflow */
-        background: #fff;
-        z-index: 1050;
-        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
-        transition: left 0.3s;
-        overflow-y: auto;
-        padding: 1rem; /* Added padding for sidebar content */
-    }
-
-    .sidebar.open {
-        left: 0;
-    }
-
-    .sidebar-overlay.open {
-        display: block;
-    }
-
-    .header {
-        color: white;
-        background-color: #013C84;
-        border-bottom: 1px solid #dee2e6;
-        padding: 0.75rem 1rem;
-        font-weight: 500;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .weather, .datetime, .lang-switch {
-        white-space: nowrap;
-    }
-
-    .weather, .datetime {
-        margin-right: 1rem; /* Added margin to space out header items */
-    }
-
-    .navbar-custom {
-        background-color: #013C84;
-    }
-
-    .lang-switch a {
-        color: white;
-        cursor: pointer;
-        text-decoration: none;
-        margin: 0 5px;
-    }
-
-    .lang-switch a:hover {
-        text-decoration: underline;
-    }
-
-    .dropdown-menu-custom {
-        display: none;
-        position: absolute;
-        background: #fff;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 5px 10px;
-        z-index: 1000;
-        top: 100%;
-        min-width: 120px;
-        right: 0;
-    }
-
-    .dropdown-menu-custom a {
-        display: block;
-        padding: 5px 8px;
-        color: #000;
-        text-decoration: none;
-    }
-
-    .dropdown-menu-custom a:hover {
-        background-color: #f0f0f0;
-    }
-
-    .header3 {
-        background-color: #013C84;
-    }
-
-    .toggle-button {
-        background: transparent;
-        border: none;
-        color: white;
-    }
-
-    .hidden-nav-links {
-        display: none !important;
-    }
-
-    #hindiNav {
-        flex-grow: 1;
-        display: flex;
-    }
-
-    .nav-item a {
-        color: white !important;
-    }
-
-    .nav-link {
-        padding: 0.5rem 1rem; /* Added padding to navigation links */
-    }
-
-    marquee {
-        background-color: red;
-        color: white;
-        padding: 0.5rem 1rem; /* Added padding for better readability */
-    }
-
-    /* Mid section */
-    .carousel-item img {
-        height: 400px;
-        object-fit: cover;
-    }
-
-    .carousel-caption {
-        background: rgba(0, 0, 0, 0.7);
-        opacity: 1;
-        transition: opacity 0.3s ease;
-    }
-
-    .news-list img, .category-card img, .trending-card img, .entertainment-card img {
-        height: 100px;
-        width: 150px;
-        object-fit: cover;
-    }
-
-    .fresh-news-list-item, .top-news-card, .category-card, .trending-card, .entertainment-card, .video-list-item {
-        transition: transform 0.3s;
-    }
-
-    .fresh-news-list-item:hover, .top-news-card:hover, .category-card:hover, .trending-card:hover, .entertainment-card:hover, .video-list-item:hover {
-        transform: translateY(-5px);
-    }
-
-    
-    .carousel-control-prev, .carousel-control-next {
-        background: rgba(0, 0, 0, 0.5);
-        width: 50px;
-        height: 50px;
-        top: 50%;
-        transform: translateY(-50%);
-        border-radius: 50%;
-    }
-
-    .carousel-control-prev-icon, .carousel-control-next-icon {
-        background-size: 50%, 50%;
-        width: 30px;
-        height: 30px;
-    }
-
-    .carousel-control-prev:hover, .carousel-control-next:hover {
-        background: rgba(0, 0, 0, 0.8);
-    }
-
-    .fresh-news-list-item a, .top-news-card a, .category-card a, .trending-card a, .entertainment-card a, .video-list-item a, .weekly-hots-card a, .weekly-news-card a, .bg-light a {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .fresh-news-list-item a:hover, .top-news-card a:hover, .category-card a:hover, .trending-card a:hover, .entertainment-card a:hover, .video-list-item a:hover {
-        color: inherit;
-    }
-
-    .top-news-card img {
-        height: 150px;
-        object-fit: cover;
-    }
-    .category-section, .trending-section, .entertainment-section, .videos-section {
-        margin-top: 1rem;
-    }
-    .category-section h3, .trending-section h3, .entertainment-section h3, .videos-section h3 {
-        display: inline-block;
-        margin-right: 1rem;
-    }
-
-    .category-section a.see-more, .trending-section a.see-more, .entertainment-section a.see-more, .videos-section a.see-more {
-        font-size: 0.9rem;
-        text-decoration: none;
-    }
-
-    /* Video section */
-    .videos-section h3 {
-        display: inline-block;
-        margin-right: 1rem;
-    }
-
-    .videos-section a.see-more {
-        font-size: 0.9rem;
-        text-decoration: none;
-    }
-
-    .main-video video {
-        height: 400px;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .video-list-item video {
-        height: 100px;
-        width: 150px;
-        object-fit: cover;
-    }
-
-    /* Scroll in video-list */
-    .video-list {
-        max-height: 400px;
-        overflow-y: auto;
-        padding: 0.5rem; /* Added padding for scrolling content */
-    }
-
-    .video-list-item {
-        transition: transform 0.3s;
-    }
-
-    .video-list-item:hover {
-        transform: translateY(-5px);
-    }
-
-    .video-list-item a {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .video-list-item a:hover {
-        color: inherit;
-    }
-
-    .weekly-hots-list, .weekly-news-list, .news-list {
-        max-height: 400px;
-        overflow-y: auto;
-        padding: 0.5rem; /* Added padding for scrolling content */
-    }
-
-    .ad-space {
-        height: 400px;
-        background-color: #f0f0f0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 1rem; /* Added padding for ad content */
-    }
-    .see-more {
-        font-size: 0.95rem;
-        color: #013C84;
-        text-decoration: underline;
-        font-weight: 500;
-        margin-left: 10px;
-        transition: color 0.2s;
-        cursor: pointer;
-    }
-
-    .see-more:hover {
-        color: #0056b3;
-        text-decoration: none;
-    }
-    
-    /* Fresh News Section */
-    .fresh-news-section {
-        margin-bottom: 1rem;
-    }
-    .fresh-news-list {
-        max-height: 400px;
-        overflow-y: auto;
-        padding: 0.5rem;
-    }
-    .fresh-news-item {
-        display: flex;
-        align-items: flex-start;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        margin-bottom: 1rem;
-        padding: 0.5rem;
-        transition: box-shadow 0.3s, transform 0.3s;
-        text-decoration: none;
-        color: inherit;
-        position: relative;
-        min-height: 110px;
-    }
-    .fresh-news-item-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    
-    .fresh-news-item h6, 
-    .business-news-content h6,
-    .top-news-item-content h6,
-    .news-section-item-content h6 {
-    margin: 0 0 0.25rem 1rem;
-    font-size: 1rem;
-    font-weight: 400; /* Changed from 600 to 400 for normal weight */
-    }
-    .fresh-news-item small {
-        color: #888;
-        margin-top: auto;
-        margin-left: 1rem;
-        display: block;
-        align-self: flex-start;
-    }
-
-    @media (max-width: 576px) {
-        .fresh-news-item img {
-            height: 80px;
-            width: 120px;
-        }
-        .fresh-news-item h6 {
-            font-size: 0.95rem;
-        }
-    }
-    @media (max-width: 768px) and (min-width: 577px) {
-        .fresh-news-item img {
-            height: 90px;
-            width: 135px;
-        }
-        .fresh-news-item h6 {
-            font-size: 1rem;
-        }
-    }
-
-    /* Top News Section */
-    .top-news-section {
-        margin-bottom: 2rem;
-    }
-    .top-news-section h2 {
-        display: inline-block;
-        margin-right: 1rem;
-    }
-    .top-news-section .see-more {
-        font-size: 0.95rem;
-        color: #013C84;
-        text-decoration: underline;
-        font-weight: 500;
-        margin-left: 10px;
-        transition: color 0.2s;
-        cursor: pointer;
-    }
-    .top-news-section .see-more:hover {
-        color: #0056b3;
-        text-decoration: none;
-    }
-    .top-news-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-    .top-news-item {
-        display: flex;
-        flex-direction: column;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        width: 100%;
-        max-width: 300px;
-        min-width: 220px;
-        text-decoration: none;
-        color: inherit;
-        transition: box-shadow 0.3s, transform 0.3s;
-        padding: 0;
-        position: relative;
-    }
-    .top-news-item:hover {
-        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
-        transform: translateY(-5px);
-        text-decoration: none;
-        color: inherit;
-    }
-    .top-news-item img.fluid-img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-    }
-    .top-news-item-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        flex: 1 1 auto;
-        padding: 0.75rem 1rem 0.75rem 1rem;
-    }
-    .top-news-item-content h6 {
-        font-size: 1rem;
-        font-weight: 400; /* Changed from 600 to 400 for normal weight */
-        margin-bottom: 0.5rem;
-    }
-    .top-news-item-content small {
-        color: #888;
-        margin-top: auto;
-        display: block;
-    }
-    @media (max-width: 576px) {
-        .top-news-list {
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        .top-news-item img.fluid-img {
-            height: 100px;
-        }
-        .top-news-item-content h6 {
-            font-size: 0.95rem;
-        }
-    }
-    @media (max-width: 768px) and (min-width: 577px) {
-        .top-news-item img.fluid-img {
-            height: 120px;
-        }
-        .top-news-item-content h6 {
-            font-size: 1rem;
-        }
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 576px) {
-        /* Header */
-        /* .container-fluid.header {
-            display: none !important;
-        } */
-
-        .weather, .lang-switch {
-            font-size: 0.9rem;
-        }
-
-        .header {
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 0.5rem 1rem;
-        }
-
-        .weather, .datetime, .lang-switch {
-            margin-bottom: 0.5rem;
-        }
-
-        .datetime {
-            font-size: 0.9rem;
-        }
-
-        /* Navigation */
-        .nav-item a {
-            font-size: 0.9rem !important;
-        }
-
-        #hindiNav {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        /* Marquee */
-        marquee {
-            font-size: 0.9rem;
-            padding: 0.5rem; /* Adjusted padding for smaller screens */
-        }
-
-        /* General Typography */
-        h2 {
-            font-size: 1.5rem;
-        }
-
-        h3 {
-            font-size: 1.2rem;
-        }
-
-        /* Fresh News */
-        .carousel-item img {
-            height: 200px;
-        }
-
-        .carousel-control-prev, .carousel-control-next {
-            width: 30px;
-            height: 30px;
-        }
-
-        .carousel-control-prev-icon, .carousel-control-next-icon {
-            width: 15px;
-            height: 15px;
-        }
-
-        .news-list img {
-            height: 80px;
-            width: 120px;
-        }
-
-        .news-list-item:hover {
-            transform: none;
-        }
-        .card-title {
-            margin-left: 1 rem;
-            font-size: 1rem;
-        }
-
-        /* Top News */
-        .top-news-card img {
-            width: 100%;
-            height: 200px;  
-            object-fit: cover;
-        }
-
-        .top-news-card:hover {
-            transform: none;
-        }
-
-        /* Categories and Trending */
-        .category-section , .trending-section {
-            margin-top: 1rem;
-        }
-        .category-card img, .trending-card img {
-            height: 80px;
-            width: 120px;
-        }
-
-        .category-section h3, .trending-section h3 {
-            font-size: 1.2rem;
-        }
-
-        .category-section a.see-more, .trending-section a.see-more {
-            font-size: 0.8rem;
-        }
-
-        .category-card:hover, .trending-card:hover {
-            transform: none;
-        }
-
-        /* Entertainment */
-        .entertainment-card img {
-            height: 80px;
-            width: 120px;
-        }
-
-        .entertainment-section h3 {
-            font-size: 1.2rem;
-        }
-
-        .entertainment-section a.see-more {
-            font-size: 0.8rem;
-        }
-
-        .entertainment-card:hover {
-            transform: none;
-        }
-
-        /* Videos */
-        .main-video video {
-            height: 200px;
-        }
-
-        .video-list-item video {
-            height: 60px;
-            width: 120px;
-        }
-
-        .video-list {
-            max-height: 300px;
-            padding: 0.25rem; /* Reduced padding for smaller screens */
-        }
-
-        .videos-section h3 {
-            font-size: 1.2rem;
-        }
-
-        .videos-section a.see-more {
-            font-size: 0.8rem;
-        }
-
-        .video-list-item:hover {
-            transform: none;
-        }
-
-        /* Weekly Highlights */
-        .weekly-hots-list, .weekly-news-list {
-            max-height: 300px;
-            padding: 0.25rem; /* Reduced padding for smaller screens */
-        }
-
-        .ad-space {
-            height: 200px;
-            padding: 0.5rem; /* Reduced padding for smaller screens */
-        }
-
-        .weekly-highlights-section h2 {
-            font-size: 1.5rem;
-        }
-
-        .weekly-hots-section h3, .weekly-news-section h3 {
-            font-size: 1.2rem;
-        }
-    }
-
-    @media (max-width: 768px) and (min-width: 577px) {
-        /* Header */
-        .weather, .lang-switch {
-            font-size: 0.95rem;
-        }
-
-        /* Navigation */
-        .nav-item a {
-            font-size: 0.95rem !important;
-        }
-
-        /* Marquee */
-        marquee {
-            font-size: 0.95rem;
-            padding: 0.5rem 1rem; /* Maintain padding for medium screens */
-        }
-
-        /* General Typography */
-        h2 {
-            font-size: 1.8rem;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-        }
-
-        /* Fresh News */
-        .carousel-item img {
-            height: 300px;
-        }
-
-        .carousel-control-prev, .carousel-control-next {
-            width: 40px;
-            height: 40px;
-        }
-
-        .carousel-control-prev-icon, .carousel-control-next-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Top News */
-        .top-news-card img {
-            height: 135px;
-        }
-
-        /* Categories and Trending */
-        .category-card img, .trending-card img {
-            height: 90px;
-            width: 135px;
-        }
-
-        .category-section h3, .trending-section h3 {
-            font-size: 1.4rem;
-        }
-
-        /* Entertainment */
-        .entertainment-card img {
-            height: 90px;
-            width: 135px;
-        }
-
-        .entertainment-section h3 {
-            font-size: 1.4rem;
-        }
-
-        /* Videos */
-        .main-video video {
-            height: 300px;
-        }
-
-        .video-list_item video {
-            height: 80px;
-            width: 150px;
-        }
-
-        .videos-section h3 {
-            font-size: 1.4rem;
-        }
-
-        /* Weekly Highlights */
-        .ad-space {
-            height: 300px;
-            padding: 0.75rem; /* Adjusted padding for medium screens */
-        }
-
-        .weekly-highlights-section h2 {
-            font-size: 1.8rem;
-        }
-
-        .weekly-hots-section h3, .weekly-news-section h3 {
-            font-size: 1.4rem;
-        }
-    }
-
-    /* Common styles for all news sections */
-    .sports-news-section,
-    .international-news-section,
-    .business-news-section,
-    .technology-news-section,
-    .trending-news-section {
-        margin-bottom: 2rem;
-    }
-
-    .sports-news-section h2,
-    .international-news-section h2,
-    .business-news-section h2,
-    .technology-news-section h2,
-    .trending-news-section h2 {
-        display: inline-block;
-        margin-right: 1rem;
-        font-size: 1.5rem;
-        font-weight: 600;
-    }
-
-    .news-section-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-
-    .news-section-item {
-        display: flex;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        overflow: hidden;
-        text-decoration: none;
-        color: inherit;
-        transition: transform 0.3s, box-shadow 0.3s;
-        min-height: 110px;
-    }
-
-    .news-section-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-    }
-
-    .news-section-item img.fluid-img {
-        width: 150px;
-        height: 100px;
-        object-fit: cover;
-    }
-
-    .news-section-item-content {
-        flex: 1;
-        padding: 0.75rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .news-section-item h6 {
-        margin: 0 0 0.5rem 0;
-        font-size: 1rem;
-        font-weight: 400; /* Changed from 600 to 400 for normal weight */
-    }
-
-    .news-section-item small {
-        color: #888;
-        margin-top: auto;
-    }
-
-    /* Entertainment Section */
-    .entertainment-news-section {
-        margin-bottom: 2rem;
-    }
-
-    .entertainment-news-section h2 {
-        display: inline-block;
-        margin-right: 1rem;
-        font-size: 1.5rem;
-        font-weight: 600;
-    }
-
-    /* Weekly News Sections */
-    .weekly-hots-section,
-    .more-weekly-news-section {
-        margin-bottom: 2rem;
-    }
-
-    .weekly-hots-section h2,
-    .more-weekly-news-section h2 {
-        display: inline-block;
-        margin-right: 1rem;
-        font-size: 1.5rem;
-        font-weight: 600;
-    }
-
-    /* Responsive styles for weekly sections */
-    @media (max-width: 576px) {
-        .entertainment-news-section .row {
-            gap: 1rem;
-        }
-
-        .entertainment-news-section .news-section-item,
-        .weekly-hots-section .news-section-item,
-        .more-weekly-news-section .news-section-item {
-            flex-direction: column;
-        }
-
-        .entertainment-news-section .news-section-item img.fluid-img {
-            width: 100%;
-            height: 200px;
-        }
-
-        .weekly-hots-section h2,
-        .more-weekly-news-section h2 {
-            font-size: 1.2rem;
-        }
-    }
-
-    @media (max-width: 768px) and (min-width: 577px) {
-        .entertainment-news-section .row {
-            gap: 0.75rem;
-        }
-
-        .entertainment-news-section .news-section-item img.fluid-img {
-            width: 100%;
-            height: 180px;
-        }
-    }
-
-
-    @media (max-width: 576px) {
-        footer .row {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        footer .col-md-3,
-        footer .col-md-2 {
-            width: 100%;
-            margin-bottom: 1rem;
-        }
-
-        footer .text-center {
-            width: 100%;
-            text-align: center;
-        }
-    }
-
-    /* Carousel caption label for fresh news section */
-.carousel-caption.d-none.d-md-block {
-    background: rgba(0, 0, 0, 0.45); /* Custom blue background with opacity */
-    color: #fff;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    left: 1.5rem;
-    right: 1.5rem;
-    bottom: 1.5rem; 
-    font-size: 1.2rem;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    text-align: left;
-}
-@media (max-width: 576px) {
-  .carousel-caption.d-none.d-md-block {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    left: 0.5rem;
-    right: 0.5rem;
-    bottom: 0.5rem;
-  }
-}
-  </style>
 </head>
 <body>
     <!-- Sidebar Overlay -->
@@ -1039,14 +162,11 @@
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <a href="#news1">
-                                <img class="fluid-img" loading="lazy" width="300" height="150" src="" alt="news image for INDIA'S ALL PARTY DELEGATION" />
-                                <img class="fluid-img  " loading="lazy"  width="300" height="150" src="" srcset="{{asset(image_medium($banner->banner))}}" alt="news image for {{$banner->title}}"  />
-
-                                <img src="https://marketplace.canva.com/EAFHzeyP6Ps/2/0/1600w/canva-red-bold-news-youtube-thumbnail-yTqx8fOM10c.jpg" class="d-block w-100" alt="News Image 1">
+                                <!-- <img class="fluid-img" loading="lazy" width="300" height="150" src="" alt="news image for INDIA'S ALL PARTY DELEGATION" /> -->
+                                <img class="fluid-img  " loading="lazy"  width="900" height="150" src="media/WhatsApp Image 2025-06-07 at 12.04.21_70b20258.jpg"  />
+                                <title class="carousel-caption d-none d-md-block">राजस्थान बोर्ड 12वीं रिजल्ट 2025</title>
+                                <!-- <img src="https://marketplace.canva.com/EAFHzeyP6Ps/2/0/1600w/canva-red-bold-news-youtube-thumbnail-yTqx8fOM10c.jpg" class="d-block w-100" alt="News Image 1"> -->
                             </a>
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>राजस्थान बोर्ड 12वीं रिजल्ट 2025</h5>
-                            </div>
                         </div>
                         <div class="carousel-item">
                             <a href="#news2">
@@ -1080,21 +200,21 @@
             <section class="fresh-news-section col-lg-4" aria-label="fresh-news-section">
                 <div class="fresh-news-list news-list" aria-label="Fresh-news-list">
                     <a href="#news4" class="fresh-news-item mb-3" aria-label="top news item">
-                        <img class="fluid-img" loading="lazy" width="300" height="150" src="" alt="news image for INDIA'S ALL PARTY DELEGATION" />
+                        <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for INDIA'S ALL PARTY DELEGATION" />
                         <div class="fresh-news-item-content">
                             <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
                             <small class="text-muted">Published on 20 May 2025</small>
                         </div>
                     </a>
                     <a href="#news5" class="fresh-news-item mb-3" aria-label="top news item">
-                        <img class="fluid-img" loading="lazy" width="300" height="150" src="https://th.bing.com/th/id/OIP.MNnugqzPBeH52tvkPggwYAHaEK?w=300&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="news image for INDIA'S ALL PARTY DELEGATION" />
+                        <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for INDIA'S ALL PARTY DELEGATION" />
                         <div class="fresh-news-item-content">
                             <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
                             <small class="text-muted">Published on 20 May 2025</small>
                         </div>
                     </a>
                     <a href="#news6" class="fresh-news-item mb-3" aria-label="top news item">
-                        <img class="fluid-img" loading="lazy" width="300" height="150" src="https://www.washingtonpost.com/resizer/2_-nHpdRqmLsKHLauFKNAYEgi6U=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/Q6SEWGE5S4I6TBOWKIIXGP4SY4.jpg" alt="news image for INDIA'S ALL PARTY DELEGATION" />
+                        <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for INDIA'S ALL PARTY DELEGATION" />
                         <div class="fresh-news-item-content">
                             <h6 class="card-title">INDIA'S ALL PARTY DELEGATION: संजय राउत ने नतुले में प्रतिनिधिमंडल पुचा जापान</h6>
                             <small class="text-muted">Published on 20 May 2025</small>
@@ -1107,59 +227,59 @@
         <!-- Top News Section -->
         <section class="top-news-section mb-4" aria-label="top-news-section">
             <h2 class="mb-3" style="margin-top: 15px;"><b>टॉप न्यूज़</b></h2>
-            <a href="#" aria-label="see more for top news" class="see-more">See More</a>
+            <a href="newslist.html" aria-label="see more for top news" class="see-more">See More</a>
             <div class="top-news-list" aria-label="top news list">
                 <a href="topnew1.html" class="top-news-item" aria-label="top news item">
-                    <img class="fluid-img" loading="lazy" width="300" height="150" src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/1200x900/PTI06-06-2025-000091B-0_1749198474630_1749198523474.jpg" alt="news image for आजादी से पहले का सपना, रेलमार्ग से कैसे जुड़ा जम्मू-कश्मीर; महाराजा हरि सिंह से क्या कनेक्शन" />
+                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for आजादी से पहले का सपना, रेलमार्ग से कैसे जुड़ा जम्मू-कश्मीर; महाराजा हरि सिंह से क्या कनेक्शन" />
                     <div class="top-news-item-content">
                         <h6 class="card-title">आजादी से पहले का सपना, रेलमार्ग से कैसे जुड़ा जम्मू-कश्मीर; महाराजा हरि सिंह से क्या कनेक्शन</h6>
                         <small class="text-muted">Published on 20 May 2025</small>
                     </div>
                 </a>
                 <a href="#topnews2" class="top-news-item" aria-label="top news item">
-                    <img class="fluid-img" loading="lazy" width="300" height="150" src="https://drop.ndtv.com/albums/NEWS/in-pics-asia-s-_638786761717445948/638786761717445948_640x480.jpeg?downsize=320:213" alt="news image for नागपुर VIO सामान्य प्री-प्लान?" />
+                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for नागपुर VIO सामान्य प्री-प्लान?" />
                     <div class="top-news-item-content">
                         <h6 class="card-title">नागपुर VIO सामान्य प्री-प्लान?</h6>
                         <small class="text-muted">Published on 20 May 2025</small>
                     </div>
                 </a>
                 <a href="#topnews3" class="top-news-item" aria-label="top news item">
-                    <img class="fluid-img" loading="lazy" width="300" height="150" src="https://drop.ndtv.com/albums/NEWS/in-pics-pm-modi_638765973137972991/638765973137972991_640x480.jpeg?downsize=320:213" alt="news image for संजय राउत ने नतुले में प्रतिनिधिमंडल" />
+                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for संजय राउत ने नतुले में प्रतिनिधिमंडल" />
                     <div class="top-news-item-content">
                         <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल</h6>
                         <small class="text-muted">Published on 20 May 2025</small>
                     </div>
                 </a>
                 <a href="#topnews4" class="top-news-item" aria-label="top news item">
-                    <img class="fluid-img" loading="lazy" width="300" height="150" src="https://drop.ndtv.com/albums/NEWS/8-budgets-8-sar_638740056404999240/638740056404999240_640x480.jpeg?downsize=320:213" alt="news image for राजस्थान बोर्ड 12वीं रिजल्ट 2025" />
+                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for राजस्थान बोर्ड 12वीं रिजल्ट 2025" />
                     <div class="top-news-item-content">
                         <h6 class="card-title">राजस्थान बोर्ड 12वीं रिजल्ट 2025</h6>
                         <small class="text-muted">Published on 20 May 2025</small>
                     </div>
                 </a>
                 <a href="#topnews5" class="top-news-item" aria-label="top news item">
-                    <img class="fluid-img" loading="lazy" width="300" height="150" src="https://drop.ndtv.com/albums/NEWS/enhancing-capab_638773031331212205/638773031331212205_640x480.jpeg?downsize=320:213" alt="news image for मध्यप्रदेश की आज की बड़ी खबरें" />
+                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for मध्यप्रदेश की आज की बड़ी खबरें" />
                     <div class="top-news-item-content">
                         <h6 class="card-title">मध्यप्रदेश की आज की बड़ी खबरें</h6>
                         <small class="text-muted">Published on 20 May 2025</small>
                     </div>
                 </a>
                 <a href="#topnews6" class="top-news-item" aria-label="top news item">
-                    <img class="fluid-img" loading="lazy" width="300" height="150" src="https://drop.ndtv.com/albums/NEWS/women-investing_638767809606417530/638767812478579596_640x480.jpeg?downsize=320:213" alt="news image for नागपुर VIO सामान्य प्री-प्लान?" />
+                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for नागपुर VIO सामान्य प्री-प्लान?" />
                     <div class="top-news-item-content">
                         <h6 class="card-title">नागपुर VIO सामान्य प्री-प्लान?</h6>
                         <small class="text-muted">Published on 20 May 2025</small>
                     </div>
                 </a>
                 <a href="#topnews7" class="top-news-item" aria-label="top news item">
-                    <img class="fluid-img" loading="lazy" width="300" height="150" src="https://drop.ndtv.com/albums/NEWS/ms-dhoni-s-csk-_638817011086819455/638817011086819455_640x480.jpeg?downsize=225:168" alt="news image for संजय राउत ने नतुले में प्रतिनिधिमंडल" />
+                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for संजय राउत ने नतुले में प्रतिनिधिमंडल" />
                     <div class="top-news-item-content">
                         <h6 class="card-title">संजय राउत ने नतुले में प्रतिनिधिमंडल</h6>
                         <small class="text-muted">Published on 20 May 2025</small>
                     </div>
                 </a>
                 <a href="#topnews8" class="top-news-item" aria-label="top news item">
-                    <img class="fluid-img" loading="lazy" width="300" height="150" src="https://th.bing.com/th/id/OIF.o6CIVOTxL3YwCpmq9yyO2g?w=294&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="news image for राजस्थान बोर्ड 12वीं रिजल्ट 2025" />
+                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for राजस्थान बोर्ड 12वीं रिजल्ट 2025" />
                     <div class="top-news-item-content">
                         <h6 class="card-title">राजस्थान बोर्ड 12वीं रिजल्ट 2025</h6>
                         <small class="text-muted">Published on 20 May 2025</small>
@@ -1177,21 +297,17 @@
                     <div class="col">
                         <section class="sports-news-section">
                             <h2>खेल</h2>
-                            <a href="#" aria-label="see more for sports news" class="see-more">See More</a>
+                            <a href="newslist.html" aria-label="see more for sports news" class="see-more">See More</a>
                             <div class="news-section-list" aria-label="sports news list">
                                 <a href="#sports1" class="news-section-item" aria-label="sports news item">
-                                    <img class="fluid-img" loading="lazy" width="300" height="150" 
-                                         src="https://images.bhaskarassets.com/webp/thumb/256x0/web2images/521/2025/06/06/untitled-design-2025-06-06t103132989_1749186099.jpg" 
-                                         alt="news image for गुकेश की नॉर्वे चेस टूर्नामेंट में चौथी जीत">
+                                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for गुकेश की नॉर्वे चेस टूर्नामेंट में चौथी जीत">
                                     <div class="news-section-item-content">
                                         <h6>गुकेश की नॉर्वे चेस टूर्नामेंट में चौथी जीत</h6>
                                         <small class="text-muted">Published on 25 May 2025</small>
                                     </div>
                                 </a>
                                 <a href="#sports2" class="news-section-item" aria-label="sports news item">
-                                    <img class="fluid-img" loading="lazy" width="300" height="150" 
-                                         src="https://feeds.abplive.com/onecms/images/uploaded-images/2025/06/06/be025310af74d6dec8f7d08747d94c5417491876531751212_original.jpg?impolicy=abp_cdn&imwidth=470" 
-                                         alt="news image for इंग्लैंड रवाना हुई भारतीय टीम">
+                                    <img class="fluid-img" loading="lazy" width="300" height="150" src="media\dummy_image2 .jpg"  alt="news image for इंग्लैंड रवाना हुई भारतीय टीम">
                                     <div class="news-section-item-content">
                                         <h6>इंग्लैंड रवाना हुई भारतीय टीम, स्टाइलिश दिखा शुभमन गिल और बाकी प्लेयर्स का लुक</h6>
                                         <small class="text-muted">Published on 25 May 2025</small>
@@ -1199,7 +315,7 @@
                                 </a>
                                 <a href="#sports3" class="news-section-item" aria-label="sports news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150" 
-                                         src="https://images.tv9hindi.com/wp-content/uploads/2025/06/bengaluru-stampede-case.jpg" 
+                                         src="media\dummy_image2 .jpg" 
                                          alt="news image for RCB के लिए आई बुरी खबर">
                                     <div class="news-section-item-content">
                                         <h6>RCB के लिए आई बुरी खबर, विराट कोहली का करीबी गिरफ्तार</h6>
@@ -1213,11 +329,11 @@
                     <div class="col">
                         <section class="international-news-section">
                             <h2>अंतरराष्ट्रीय</h2>
-                            <a href="#" aria-label="see more for international news" class="see-more">See More</a>
+                            <a href="newslist.html" aria-label="see more for international news" class="see-more">See More</a>
                             <div class="news-section-list" aria-label="international news list">
                                 <a href="#international1" class="news-section-item" aria-label="international news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150"
-                                         src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/1200x900/Pictures-of-the-Week-Global-Photo-Gallery-4_1749186288508_1749186310154.jpg"
+                                         src="media\dummy_image2 .jpg" 
                                          alt="News about China-Musk-Trump relations">
                                     <div class="news-section-item-content">
                                         <h6>चीन ने डलवाई मस्क-ट्रंप के बीच फूट? टैरिफ की मार झेल नहीं पा रहे टेस्ला के मालिक</h6>
@@ -1226,7 +342,7 @@
                                 </a>
                                 <a href="#international2" class="news-section-item" aria-label="international news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150"
-                                         src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/1200x900/PAKISTAN-INDIA-KASHMIR-UNREST-SECURITY-0_1747792758018_1749181374154.jpg"
+                                         src="media\dummy_image2 .jpg" 
                                          alt="News about India-Pakistan dam issue">
                                     <div class="news-section-item-content">
                                         <h6>जल्दी-जल्दी डैम बनाओ… भारत के एक्शन से पाक का गला सूखा</h6>
@@ -1235,7 +351,7 @@
                                 </a>
                                 <a href="#international3" class="news-section-item" aria-label="international news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150"
-                                         src="https://www.livehindustan.com/lh-img/smart/img/2025/06/05/1200x900/pak_1749127238829_1749127244005.jpg"
+                                         src="media\dummy_image2 .jpg" 
                                          alt="News about ISI Madam N spy network">
                                     <div class="news-section-item-content">
                                         <h6>कौन है ISI की 'मैडम N'? जिसने पाक के इशारे पर भारत में बिछाया 500 जासूसों का जाल</h6>
@@ -1248,11 +364,11 @@
                     <div class="col">
                         <section class="business-news-section">
                             <h2>व्यापार</h2>
-                            <a href="#" aria-label="see more for business news" class="see-more">See More</a>
+                            <a href="newslist.html" aria-label="see more for business news" class="see-more">See More</a>
                             <div class="news-section-list" aria-label="business news list">
                                 <a href="#business1" class="news-section-item" aria-label="business news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150" 
-                                         src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/PTI06-04-2024-000127B-0_1719369248199_1749182157129.jpg" 
+                                       src="media\dummy_image2 .jpg" 
                                          alt="RBI repo rate news">
                                     <div class="news-section-item-content">
                                         <h6>RBI ने दी आम आदमी को बड़ी राहत, 50 बेसिस प्वाइंट घटाया रेपो रेट, GDP को लेकर क्या अनुमान?</h6>
@@ -1261,7 +377,7 @@
                                 </a>
                                 <a href="#business2" class="news-section-item" aria-label="business news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150" 
-                                         src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/Multibagger_Stock_1749190236727_1749190246194.jpg" 
+                                         src="media\dummy_image2 .jpg" 
                                          alt="Stock market news">
                                     <div class="news-section-item-content">
                                         <h6>एक महीने में 200% उछला यह शेयर, 99 रुपये पर आया IPO, अब 300 रुपये के पार दाम</h6>
@@ -1270,7 +386,7 @@
                                 </a>
                                 <a href="#business3" class="news-section-item" aria-label="business news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150" 
-                                         src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/Sanjay_malhotra_RBI_Governer__1749182761262_1749182761439.jpeg" 
+                                         src="media\dummy_image2 .jpg" 
                                          alt="RBI Governor news">
                                     <div class="news-section-item-content">
                                         <h6>RBI ने दी आम आदमी को बड़ी राहत, 50 बेसिस प्वाइंट घटाया रेपो रेट, GDP को लेकर क्या अनुमान?</h6>
@@ -1284,11 +400,11 @@
                     <div class="col">
                         <section class="technology-news-section">
                             <h2>प्रौद्योगिकी</h2>
-                            <a href="#" aria-label="see more for technology news" class="see-more">See More</a>
+                            <a href="newslist.html" aria-label="see more for technology news" class="see-more">See More</a>
                             <div class="news-section-list" aria-label="technology news list">
                                 <a href="#tech1" class="news-section-item" aria-label="technology news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150"
-                                         src="https://www.livehindustan.com/lh-img/smart/img/2025/01/17/256x144/Mahones_1737122312516_1737122368388.jpg"
+                                         src="media\dummy_image2 .jpg" 
                                          alt="News about AI and VR technology at Mahakumbh 2025">
                                     <div class="news-section-item-content">
                                         <h6>महाकुंभ 2025: यूज हो रही लेटेस्ट AI और VR टेक्नोलॉजी, तस्वीरों में देखें क्या है खास</h6>
@@ -1297,7 +413,7 @@
                                 </a>
                                 <a href="#tech2" class="news-section-item" aria-label="technology news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150"
-                                         src="https://images1.livehindustan.com/uploadimage/library/2021/07/21/16_9/16_9_4/oppo_a16_has_strong_battery_with_great_features_know_the_priceand_specificatons_1626852119.jpg"
+                                       src="media\dummy_image2 .jpg" 
                                          alt="News about Oppo A16 features">
                                     <div class="news-section-item-content">
                                         <h6>दमदार बैटरी के साथ Oppo A16 में हैं शानदार फीचर्स, जानें कीमत</h6>
@@ -1306,7 +422,7 @@
                                 </a>
                                 <a href="#tech3" class="news-section-item" aria-label="technology news item">
                                     <img class="fluid-img" loading="lazy" width="300" height="150"
-                                         src="https://images1.livehindustan.com/uploadimage/library/2021/10/01/16_9/16_9_4/share_market_ipo_1633088297.jpeg"
+                                       src="media\dummy_image2 .jpg" 
                                          alt="News about successful IPOs">
                                     <div class="news-section-item-content">
                                         <h6>इस साल इन 5 कंपनियों के IPO ने निवेशकों को किया मालामाल</h6>
@@ -1323,11 +439,11 @@
             <div class="col-lg-4">
                 <section class="trending-news-section">
                     <h2>ट्रेंडिंग</h2>
-                    <a href="#" aria-label="see more for trending news" class="see-more">See More</a>
+                    <a href="newslist.html" aria-label="see more for trending news" class="see-more">See More</a>
                     <div class="news-section-list" aria-label="trending news list">
                         <a href="#trending1" class="news-section-item" aria-label="trending news item">
                             <img class="fluid-img" loading="lazy" width="300" height="150"
-                                 src="https://www.livehindustan.com/lh-img/smart/img/2025/05/29/1200x900/child_snake_viral_video_1748532258454_1748532268822.jpg"
+                                 src="media\dummy_image2 .jpg" 
                                  alt="Viral video of child and snake">
                             <div class="news-section-item-content">
                                 <h6>न फुफकारा, न डंसा... सांप को थप्पड़ मारता रहा बच्चा, वायरल हो रहा VIDEO कर देगा हैरान</h6>
@@ -1336,7 +452,7 @@
                         </a>
                         <a href="#trending2" class="news-section-item" aria-label="trending news item">
                             <img class="fluid-img" loading="lazy" width="300" height="150"
-                                 src="https://www.livehindustan.com/lh-img/smart/img/2025/05/29/256x144/new_york_wedding_video_1748516996506_1748517016116.jpg"
+                                src="media\dummy_image2 .jpg" 
                                  alt="Indian wedding in New York">
                             <div class="news-section-item-content">
                                 <h6>देसी गानों से झूम उठा न्यू यॉर्क का मशहूर वॉल स्ट्रीट, 400 बारातियों ने मचा दिया धमाल; VIDEO</h6>
@@ -1345,7 +461,7 @@
                         </a>
                         <a href="#trending3" class="news-section-item" aria-label="trending news item">
                             <img class="fluid-img" loading="lazy" width="300" height="150"
-                                 src="https://www.livehindustan.com/lh-img/smart/img/2025/05/24/256x144/a_driver_dies_of_a_heart_attack_1748089711069_1748089730985.jpeg"
+                                 src="media\dummy_image2 .jpg" 
                                  alt="Bus driver heart attack news">
                             <div class="news-section-item-content">
                                 <h6>चलती बस में हार्ट अटैक से ड्राइवर की मौत, सवार थे 40 यात्री; फिर जो हुआ...</h6>
@@ -1354,7 +470,7 @@
                         </a>
                         <a href="#trending4" class="news-section-item" aria-label="trending news item">
                             <img class="fluid-img" loading="lazy" width="300" height="150"
-                                 src="https://www.livehindustan.com/lh-img/smart/img/2025/05/14/256x144/Prabhas_back_shot_in_Salaar_1747191886458_1747191891049.jpg"
+                                src="media\dummy_image2 .jpg" 
                                  alt="OTT release news">
                             <div class="news-section-item-content">
                                 <h6>ओटीटी पर रिलीज के 450 दिन बाद भी जलवा कायम, टॉप 10 की लिस्ट से उतर ही नहीं रही</h6>
@@ -1363,7 +479,7 @@
                         </a>
                         <a href="#trending5" class="news-section-item" aria-label="trending news item">
                             <img class="fluid-img" loading="lazy" width="300" height="150"
-                                 src="https://www.livehindustan.com/lh-img/smart/img/2025/05/01/256x144/dfd_1746084565345_1746084572814.jpg"
+                               src="media\dummy_image2 .jpg" 
                                  alt="Recipe news">
                             <div class="news-section-item-content">
                                 <h6>आपकी चटपटी क्रेविंग को दूर कर सकती हैं अमृतसरी पनीर भुर्जी की ये रेसिपी, नोट करें बनाने का तरीका</h6>
@@ -1378,12 +494,12 @@
             <div class="col-12">
                 <section class="entertainment-news-section">
                     <h2>मनोरंजन</h2>
-                    <a href="#" aria-label="see more for entertainment news" class="see-more">See More</a>
+                    <a href="newslist.html" aria-label="see more for entertainment news" class="see-more">See More</a>
                     <div class="row row-cols-1 row-cols-md-3 g-4 mt-2">
                         <div class="col">
                             <a href="#entertainment1" class="news-section-item" aria-label="entertainment news item">
                                 <img class="fluid-img" loading="lazy" width="300" height="150"
-                                     src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/MixCollage-06-Jun-2025-12-17-PM-8854_1749192431784_1749192441171.jpg"
+                                    src="media\dummy_image2 .jpg" 
                                      alt="News about Vidya Balan and Akshay Kumar">
                                 <div class="news-section-item-content">
                                     <h6 class="card-title">फिल्म में साथ काम नहीं करने पर विद्या बालन पर भड़के थे अक्षय, एक्ट्रेस ने जॉन से कहा- मुझे बचा लो</h6>
@@ -1394,7 +510,7 @@
                         <div class="col">
                             <a href="#entertainment2" class="news-section-item" aria-label="entertainment news item">
                                 <img class="fluid-img" loading="lazy" width="300" height="150"
-                                     src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/amitabh_abhishek_laal_pari_1749188068301_1749188079871.png"
+                                    src="media\dummy_image2 .jpg" 
                                      alt="News about Abhishek Bachchan and Nora Fatehi">
                                 <div class="news-section-item-content">
                                     <h6 class="card-title">अभिषेक बच्चन ने किया नोरा फतेही का 'हाय गर्मी' स्टेप, पिता अमिताभ बोले- मजेदार</h6>
@@ -1405,7 +521,7 @@
                         <div class="col">
                             <a href="#entertainment3" class="news-section-item" aria-label="entertainment news item">
                                 <img class="fluid-img" loading="lazy" width="300" height="150"
-                                     src="https://www.livehindustan.com/lh-img/smart/img/2025/06/06/256x144/housefull_5_india_1749192091144_1749192094675.png"
+                                     src="media\dummy_image2 .jpg" 
                                      alt="News about Housefull 5">
                                 <div class="news-section-item-content">
                                     <h6 class="card-title">Twitter Review: हाउसफुल 5 है थ्रिल और कॉमेडी का परफेक्ट मिक्स, लोगों ने अक्षय कुमार को कहा कॉमेडी किंग</h6>
@@ -1418,6 +534,7 @@
             </div>
         </div>
     </div>
+    
         <!-- Video Section -->
     <div class="container my-4">
         <div class="videos-section">
@@ -1519,7 +636,7 @@
             </div>
         </div>
         <!-- Weekly Highlights Section -->
-        <div class="row mt-5">
+        <section class="weekly-highlights-section row mt-5">
             <div class="col-12">
                 <div class="weekly-highlights-section">
                     <h2 class="mb-3">साप्ताहिक हाइलाइट्स</h2>
@@ -1528,11 +645,11 @@
                         <div class="col-lg-4">
                             <div class="weekly-hots-section">
                                 <h2>इस सप्ताह के हॉट्स</h2>
-                                <a href="#" aria-label="see more for weekly hot news" class="see-more">See More</a>
+                                <a href="newslist.html" aria-label="see more for weekly hot news" class="see-more">See More</a>
                                 <div class="news-section-list" aria-label="weekly hot news list">
                                     <a href="#weeklyhot1" class="news-section-item" aria-label="weekly hot news item">
                                         <img class="fluid-img" loading="lazy" width="300" height="150"
-                                             src="https://www.eventfaqs.com/uploads/news/content/untitled-design---2023-12-18t133410.080.jpg"
+                                             src="media\dummy_image2 .jpg" 
                                              alt="Mumbai cultural festival news">
                                         <div class="news-section-item-content">
                                             <h6>मुंबई में सांस्कृतिक उत्सव की धूम</h6>
@@ -1541,7 +658,7 @@
                                     </a>
                                     <a href="#weeklyhot2" class="news-section-item" aria-label="weekly hot news item">
                                         <img class="fluid-img" loading="lazy" width="300" height="150"
-                                             src="https://akm-img-a-in.tosshub.com/aajtak/images/story/202309/metro_new-sixteen_nine.jpg?size=948:533"
+                                             src="media\dummy_image2 .jpg" 
                                              alt="Delhi Metro inauguration news">
                                         <div class="news-section-item-content">
                                             <h6>दिल्ली में नई मेट्रो लाइन का उद्घाटन</h6>
@@ -1550,7 +667,7 @@
                                     </a>
                                     <a href="#weeklyhot3" class="news-section-item" aria-label="weekly hot news item">
                                         <img class="fluid-img" loading="lazy" width="300" height="150"
-                                             src="https://c.ndtvimg.com/2024-02/1aj5a1qg_jeet-adani_625x300_27_February_24.jpeg?downsize=773:435"
+                                             src="media\dummy_image2 .jpg" 
                                              alt="Pune tech festival news">
                                         <div class="news-section-item-content">
                                             <h6>पुणे में टेक फेस्टिवल का आयोजन</h6>
@@ -1559,7 +676,7 @@
                                     </a>
                                     <a href="#weeklyhot4" class="news-section-item" aria-label="weekly hot news item">
                                         <img class="fluid-img" loading="lazy" width="300" height="150"
-                                             src="https://th.bing.com/th/id/OSK.HERO4tZLD9ltl7QzOOyD9mIjxiUmvzVDSAuhiI1A0nRWJL4?w=472&h=280&c=1&rs=2&o=6&cb=thwsc1&dpr=1.3&pid=SANGAM"
+                                            src="media\dummy_image2 .jpg" 
                                              alt="Jaipur literature festival news">
                                         <div class="news-section-item-content">
                                             <h6>जयपुर में साहित्य सम्मेलन</h6>
@@ -1574,11 +691,11 @@
                         <div class="col-lg-4">
                             <div class="more-weekly-news-section">
                                 <h2>और साप्ताहिक समाचार</h2>
-                                <a href="#" aria-label="see more for more weekly news" class="see-more">See More</a>
+                                <a href="newslist.html" aria-label="see more for more weekly news" class="see-more">See More</a>
                                 <div class="news-section-list" aria-label="more weekly news list">
                                     <a href="#weeklynews1" class="news-section-item" aria-label="weekly news item">
                                         <img class="fluid-img" loading="lazy" width="300" height="150"
-                                             src="https://etvbharatimages.akamaized.net/etvbharat/prod-images/15-04-2025/1200-675-23966333-thumbnail-16x9-ppjpg.jpg??imwidth=3840"
+                                            src="media\dummy_image2 .jpg" 
                                              alt="Hyderabad IT company news">
                                         <div class="news-section-item-content">
                                             <h6>हैदराबाद में नई आईटी कंपनी की शुरुआत</h6>
@@ -1587,7 +704,7 @@
                                     </a>
                                     <a href="#weeklynews2" class="news-section-item" aria-label="weekly news item">
                                         <img class="fluid-img" loading="lazy" width="300" height="150"
-                                             src="https://www.prabhatkhabar.com/wp-content/uploads/2024/05/Kolkata-Metro.jpg"
+                                             src="media\dummy_image2 .jpg" 
                                              alt="Kolkाता Metro expansion news">
                                         <div class="news-section-item-content">
                                             <h6>कोलकाता में मेट्रो विस्तार की योजना</h6>
@@ -1596,7 +713,7 @@
                                     </a>
                                     <a href="#weeklynews3" class="news-section-item" aria-label="weekly news item">
                                         <img class="fluid-img" loading="lazy" width="300" height="150"
-                                             src="https://th.bing.com/th/id/OIP.mShqVBioo5VuGLcDj4T1FwHaDt?w=333&h=175&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                                             src="media\dummy_image2 .jpg" 
                                              alt="Chandigarh startup event news">
                                         <div class="news-section-item-content">
                                             <h6>चंडीगढ़ में नया स्टार्टअप इवेंट</h6>
@@ -1605,7 +722,7 @@
                                     </a>
                                     <a href="#weeklynews4" class="news-section-item" aria-label="weekly news item">
                                         <img class="fluid-img" loading="lazy" width="300" height="150"
-                                             src="https://indianexpress.com/wp-content/uploads/2015/06/smart-city1.jpg"
+                                             src="media\dummy_image2 .jpg" 
                                              alt="Ahmedabad smart city project news">
                                         <div class="news-section-item-content">
                                             <h6>अहमदाबाद में स्मार्ट सिटी प्रोजेक्ट</h6>
@@ -1628,9 +745,37 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
+    <!-- Newsletter Subscribe Section -->
+   <section class="newsletter-section ">
+        <div class="cont">
+                <div class="subscribe-text">
+                    <small>SUBSCRIBE OUR</small>
+                    <h1>Newsletter</h1>
+                </div>
+            <form class="subscribe-form">
+                <input type="email" placeholder="Email Address" required />
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        stroke-width="2" 
+                        stroke-linecap="round" 
+                        stroke-linejoin="round"
+                        style="color: #000;">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+            </button>
+            </form>
+
+        </div>  
+    </section>
     
+    
+    <a href="#" class="back-to-top bac" id="backToTop">↑</a>
     <!-- Footer Section -->
     <footer class="bg-light pt-4">
         <div class="container">
@@ -1709,14 +854,14 @@
                 </div>
                 </div>
 
-                <!-- Newsletter Subscribe -->
+                <!-- Newsletter Subscribe
                 <div class="col-md-3 mb-4">
                 <h6><strong>Subscribe To Newsletter</strong></h6>
                 <form class="d-flex">
                     <input type="email" class="form-control me-2" placeholder="Enter your email">
                     <button class="btn btn-primary" type="submit">Subscribe</button>
                 </form>
-                </div>
+                </div> -->
 
                 <!-- App store section
                 <div class="row mt-3 mb-3">
@@ -1728,8 +873,19 @@
                 </div> -->
 
                 <!-- Footer Bottom -->
-                <div class="row border-top pt-3 mt-3">
-                <div class="col-md-9">
+                
+            </div> 
+               
+        </div>
+            
+            <!-- Copyright section - Full width -->
+        <div style="background-color: #013C84; width: 100%;" class="text-center text-white py-2 mt-3">
+            <div class="container">
+                &copy; 2025 Metro Link. All Rights Reserved.
+            </div>
+         </div>
+         <div class="container row pt-3 mt-3">
+                <div class=" container col-md-9">
                     <small>
                     <a href="#">About Us</a> | 
                     <a href="#">Advertise with us</a> | 
@@ -1746,213 +902,13 @@
                     </small>
                 </div>
                 </div>
-            </div>            
-        </div>
-            
-            <!-- Copyright section - Full width -->
-        <div style="background-color: #013C84; width: 100%;" class="text-center text-white py-2 mt-3">
-            <div class="container">
-                &copy; 2025 Metro Link. All Rights Reserved.
-            </div>
-         </div>
     </footer>
 
 
 
 
 
-    <script>
-    let currentCity = 'Nagpur';
-  let currentLang = 'en';
-
-  function updateDateTime(lang = currentLang) {
-    const now = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const timeOptions = { hour: '2-digit', minute: '2-digit' };
-    const locale = lang === 'hi' ? 'hi-IN' : (lang === 'mr' ? 'mr-IN' : 'en-US');
-    const dateStr = now.toLocaleDateString(locale, options);
-    const timeStr = now.toLocaleTimeString(locale, timeOptions);
-    document.getElementById('datetime').textContent = `${dateStr} – ${timeStr}`;
-  }
-
-  async function fetchWeather() {
-    try {
-      const response = await fetch(`https://wttr.in/${currentCity}?format=%C+|+%t`);
-      const text = await response.text();
-      document.getElementById('weather').textContent = `🌤️ ${text}`;
-    } catch (error) {
-      document.getElementById('weather').textContent = '🌤️ Weather unavailable';
-      console.error('Weather fetch error:', error);
-    }
-  }
-
-    //   toggle side bar
-    function openSidebar() {
-        document.getElementById('sidebar').classList.add('open');
-        document.getElementById('sidebarOverlay').classList.add('open');
-    }
-    function closeSidebar() {
-        document.getElementById('sidebar').classList.remove('open');
-        document.getElementById('sidebarOverlay').classList.remove('open');
-    }
-  function toggleDropdown(id) {
-    const langDropdown = document.getElementById('langDropdown');
-    const cityDropdown = document.getElementById('cityDropdown');
-    const targetDropdown = document.getElementById(id);
-    
-    // Close other dropdown
-    if (id === 'langDropdown') {
-      cityDropdown.style.display = 'none';
-    } else {
-      langDropdown.style.display = 'none';
-    }
-    
-    // Toggle target dropdown
-    targetDropdown.style.display = targetDropdown.style.display === 'block' ? 'none' : 'block';
-  }
-
-  function switchLanguage(lang) {
-    currentLang = lang;
-    updateDateTime();
-    document.getElementById('langDropdown').style.display = 'none';
-    document.querySelector('.lang-option').textContent = lang.toUpperCase();
-  }
-
-  function switchCity(city) {
-    currentCity = city;
-    fetchWeather();
-    document.getElementById('cityDropdown').style.display = 'none';
-    document.querySelector('.city-option').textContent = {Nagpur: 'NG', Mumbai: 'MU', Delhi: 'DL',Pune : 'PN', Aurangabad: 'AU',Nashik : 'NA'}[city];
-  }
-
-  // Initial load
-  updateDateTime();
-  fetchWeather();
-
-  // Refresh time every 30 seconds
-  setInterval(() => updateDateTime(), 30000);
-
-  // Close dropdowns on outside click
-  document.addEventListener('click', function (e) {
-    if (!e.target.closest('.lang-switch')) {
-      document.getElementById('langDropdown').style.display = 'none';
-      document.getElementById('cityDropdown').style.display = 'none';
-    }
-  });
-
-    
-        
-    document.addEventListener('DOMContentLoaded', () => {
-            const videos = [
-                {
-                    id: '0',
-                    src: '7rings.mp4',
-                    title: 'मुंबई में भारी बारिश का वीडियो'
-                },
-                {
-                    id: '1',
-                    src: 'Are MI favourites for Qualifier 2 .mp4',
-                    title: 'नागपुर मेट्रो का उद्घाटन समारोह'
-                },
-                {
-                    id: '2',
-                    src: 'Top News_ 10 बजे की बड़ी खबरें _ Rajasthan Board _ 5th Board Result _ Rajasthan News _RBSE 5th Board.mp4',
-                    title: 'पुणे में सांस्कृतिक उत्सव का वीडियो'
-                },
-                {
-                    id: '3',
-                    src: 'https://via.placeholder.com/800x400?text=Video+4',
-                    title: 'महाराष्ट्र के लोक नृत्य का प्रदर्शन'
-                },
-                {
-                    id: '4',
-                    src: 'https://via.placeholder.com/800x400?text=Video+2',
-                    title: '4 news card'
-                }
-            ];
-
-            const mainVideo = document.getElementById('mainVideo');
-            const mainVideoSource = document.getElementById('mainVideoSource');
-            const mainVideoTitle = document.getElementById('mainVideoTitle');
-            const videoList = document.getElementById('videoList');
-
-            let currentVideoIndex = 0; // Track the index of the current main video
-
-            // Function to update the main video and the list
-            function updateVideoDisplay(selectedIndex, playAfterUpdate = false) {
-                // Pause the current main video
-                mainVideo.pause();
-                mainVideo.currentTime = 0;
-
-                // Update the main video
-                const selectedVideo = videos[selectedIndex];
-                mainVideoSource.src = selectedVideo.src;
-                mainVideoTitle.textContent = selectedVideo.title;
-                mainVideo.load();
-
-                // Play the video only if specified (e.g., after a click from the list)
-                if (playAfterUpdate) {
-                    mainVideo.play().catch(error => {
-                        console.error('Error playing video:', error);
-                    });
-                }
-
-                // Update the current index
-                currentVideoIndex = selectedIndex;
-
-                // Update the video list with all videos except the current main video
-                videoList.innerHTML = '';
-                videos.forEach((video, index) => {
-                    if (index !== currentVideoIndex) {
-                        const listItem = document.createElement('div');
-                        listItem.className = 'video-list-item mb-3';
-                        listItem.setAttribute('data-video-index', index);
-                        listItem.innerHTML = `
-                            <a href="#" class="video-link">
-                                <div class="card">
-                                    <div class="row g-0">
-                                        <div class="col-5">
-                                            <video muted>
-                                                <source src="${video.src}" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                        <div class="col-7">
-                                            <div class="card-body">
-                                                <h6 class="card-title">${video.title}</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        `;
-                        videoList.appendChild(listItem);
-                    }
-                });
-
-                // Reattach event listeners to the new video links
-                attachVideoLinkListeners();
-            }
-
-            // Function to attach click event listeners to video links
-            function attachVideoLinkListeners() {
-                const videoLinks = document.querySelectorAll('.video-link');
-                videoLinks.forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const videoIndex = parseInt(link.parentElement.getAttribute('data-video-index'));
-                        updateVideoDisplay(videoIndex, true); // Play the video after swapping
-                    });
-                });
-            }
-
-            // Initially display the first video as the main video, but do not play it
-            updateVideoDisplay(currentVideoIndex, false);
-        });
-    
-
-        
-    </script>
+    <script src="homejs.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

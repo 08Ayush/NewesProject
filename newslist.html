@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>टेक्नोलॉजी समाचार - Technology News</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .sidebar-overlay {
+        display: none;
+        position: fixed;
+        z-index: 1040;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 135px; /* Set this to your header's total height */
+        left: -320px;
+        width: 300px;
+        height: calc(100% - 130px); /* Adjust height so it doesn't overflow */
+        background: #fff;
+        z-index: 1050;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+        transition: left 0.3s;
+        overflow-y: auto;
+        padding: 1rem; /* Added padding for sidebar content */
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .sidebar-overlay.open {
+        display: block;
+    }
+    
+
+    .header {
+        color: white;
+        background-color: #013C84;
+        border-bottom: 1px solid #dee2e6;
+        padding: 0.75rem 1rem;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+        .weather, .datetime, .lang-switch {
+        white-space: nowrap;
+    }
+
+    .weather, .datetime {
+        margin-right: 1rem; /* Added margin to space out header items */
+    }
+
+    .navbar-custom {
+        background-color: #013C84;
+    }
+
+    .lang-switch a {
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        margin: 0 5px;
+    }
+
+    .lang-switch a:hover {
+        text-decoration: underline;
+    }
+
+    .dropdown-menu-custom {
+        display: none;
+        position: absolute;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 5px 10px;
+        z-index: 1000;
+        top: 100%;
+        min-width: 120px;
+        right: 0;
+    }
+
+    .dropdown-menu-custom a {
+        display: block;
+        padding: 5px 8px;
+        color: #000;
+        text-decoration: none;
+    }
+
+    .dropdown-menu-custom a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .header3 {
+        background-color: #013C84;
+    }
+
+    .toggle-button {
+        background: transparent;
+        border: none;
+        color: white;
+    }
+
+    .hidden-nav-links {
+        display: none !important;
+    }
+
+    #hindiNav {
+        flex-grow: 1;
+        display: flex;
+    }
+
+    .nav-item a {
+        color: white !important;
+    }
+    .bg-light a{
+        color: inherit;
+        text-decoration: none;
+    }
+        body {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .Category_Heading {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: black;
+            padding-top: 1rem;
+        }
+        .news-card {
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 150px; /* Reduced from 200px */
+            object-fit: cover;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .news-meta {
+            font-size: 0.75rem; /* Reduced from 0.85rem */
+            color: #6c757d;
+        }
+
+        .news-title {
+            color: #013C84;
+            font-weight: 500;
+            margin: 0.3rem 0;
+            line-height: 1.3;
+            font-size: 1rem; /* Reduced font size */
+        }
+
+        .news-description {
+            color: #495057;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            max-height: 2.8em; /* Fallback for non-webkit browsers */
+        }
+
+        .category-badge {
+            background-color: #e3f2fd;
+            color: #013C84;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .news-card .p-3 {
+            padding: 0.75rem !important; /* Reduced padding */
+        }
+
+        .btn-sm {
+            padding: 0.2rem 0.5rem;
+            font-size: 0.75rem;
+        }
+
+        /* Make the grid more compact */
+        .row {
+            margin-right: -0.5rem;
+            margin-left: -0.5rem;
+        }
+
+        .col-lg-4, .col-md-6 {
+            padding-right: 0.5rem;
+            padding-left: 0.5rem;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 44px;
+            height: 44px;
+            background: #013C84;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, background 0.2s;
+            z-index: 2000;
+            text-decoration: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .back-to-top:hover, .back-to-top:focus {
+            background: #0056b3;
+            color: #fff;
+            text-decoration: none;
+        }
+        .bac {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        aside {
+            margin-top: 2rem;
+        }
+        @media (max-width: 991.98px) {
+            aside {
+                margin-top: 1.5rem;
+            }
+        }
+        aside .card {
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border-radius: 10px;
+        }
+        aside .card-body {
+            padding: 1rem 1rem 0.5rem 1rem;
+        }
+        aside .card h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        aside .latest-list li {
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+        aside .latest-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        aside .latest-list img {
+            width: 60px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+        aside .latest-list div[style*="font-size:15px"] {
+            color: #222;
+            font-size: 15px;
+            font-weight: 500;
+            margin-top: 2px;
+            line-height: 1.3;
+        }
+        aside .latest-list a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        aside .latest-list a:hover {
+            color: #1976d2;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Overlay -->
+    <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+    <div class="sidebar-header d-flex justify-content-between align-items-center px-3 py-2">
+        <span style="font-size:1.5rem;font-weight:bold;">मेन्यू</span>
+        <button class="btn-close" onclick="closeSidebar()" aria-label="Close"></button>
+    </div>
+    <ul class="list-unstyled px-3">
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>देश</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>दुनिया</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>मनोरंजन</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>क्रिकेट</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>कारोबार</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>नौकरी</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>शिक्षा</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>टेक्नोलॉजी</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>ऑटो</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>ज्योतिष</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center border-bottom">
+        <span>खेल</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center">
+        <span>हेल्थ एंड फिटनेस</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+        <li class="py-2 d-flex justify-content-between align-items-center">
+        <span>फैशन</span>
+        <button class="btn btn-outline-secondary btn-sm">Follow</button>
+        </li>
+    </ul>
+    </div>
+    <header>
+    <div class="container-fluid header ">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="weather" id="weather">
+            🌤️ Loading...
+        </div>
+        <div class="datetime text-center " id="datetime">
+            <!-- JavaScript fills this -->
+        </div>
+        <div class="lang-switch text-end position-relative">
+            <span>
+            <a class="lang-option" onclick="toggleDropdown('langDropdown')">EN</a> |
+            <a class="city-option" onclick="toggleDropdown('cityDropdown')">NG</a>
+            </span>
+
+            <!-- Language Dropdown -->
+            <div id="langDropdown" class="dropdown-menu-custom">
+            <a href="#" onclick="switchLanguage('en')">English</a>
+            <a href="#" onclick="switchLanguage('hi')">Hindi</a>
+            <a href="#" onclick="switchLanguage('mr')">Marathi</a>
+            </div>
+
+            <!-- City Dropdown -->
+            <div id="cityDropdown" class="dropdown-menu-custom">
+
+                <a href="#" onclick="switchCity('Aurangabad')">Aurangabad</a>
+                <a href="#" onclick="switchCity('Nagpur')">Nagpur</a>
+                <a href="#" onclick="switchCity('Nashik')">Nashik</a>
+                <a href="#" onclick="switchCity('Mumbai')">Mumbai</a>
+                <!-- <a href="#" onclick="switchCity('Delhi')">Delhi</a> -->
+                <a href="#" onclick="switchCity('Pune')">Pune</a>
+            </div>
+        </div>
+        </div>
+        
+    </div>
+    <div class="header2 container  d-flex align-items-center justify-content-between" >
+        <a href="newhome.html" class="logo-link">
+            <img class="logo" src="media/metro2.png" style="max-width: 150px;">
+        </a>
+        <button class="toggle-button btn d-block d-lg-none" type="button" onclick="openSidebar()" aria-label="Toggle Menu" style="color: #013C84;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#013C84" class="bi bi-list" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg>
+    </button>
+    </div>
+  <div id="header3">
+  <nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container d-flex justify-content-between align-items-center">
+
+      <!-- Toggle Button -->
+      <button class="toggle-button btn d-none d-lg-block" type="button" onclick="openSidebar()" aria-label="Toggle Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" class="bi bi-list" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg>
+      </button>
+
+      <!-- Nav Items -->
+      <div id="hindiNav" class="overflow-auto w-100 ms-3">
+        <ul class="navbar-nav flex-row flex-nowrap">
+          <li class="nav-item me-3"><a class="nav-link" href="#">होम</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">देश</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">शहर और राज्य</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">मनोरंजन</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">क्रिकेट</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">ज्योतिष</a></li>
+          <li class="nav-item me-3"><a class="nav-link" href="#">और भी...</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</div>
+
+</header>
+    <!-- Category Header -->
+    <h1 class="Category_Heading container">टेक्नोलॉजी न्यूज़</h1>
+
+    <!-- News List Container -->
+    <div class="container">
+      <div class="row">
+        <!-- Main News List -->
+        <div class="col-lg-9 col-md-8">
+          <section class="News_list_section" aria-labelledby="news-list-heading">
+            <h2 id="news-list-heading" class="visually-hidden">टेक्नोलॉजी समाचार सूची</h2>
+            <div class="row g-2">
+                <!-- News Item 1 -->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <a href="#" itemprop="url" class="text-decoration-none text-dark" aria-label="OpenAI ने लॉन्च किया नया AI मॉडल - पूरी खबर पढ़ें">
+                            <img src="media/dummy_image2%20.jpg" class="news-image fluid-img" alt="image of articale" itemprop="image"  loading="lazy"  width="300" height="150" >
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="category-badge" itemprop="articleSection">AI</span>
+                                    <time class="news-meta" itemprop="datePublished" datetime="2025-06-13T10:00:00+05:30">2h</time>
+                                </div>
+                                <h3 class="news-title h5" itemprop="headline">OpenAI ने लॉन्च किया नया AI मॉडल</h3>
+                                <p class="news-description" itemprop="description">OpenAI ने अपना नया AI मॉडल लॉन्च किया है जो GPT-5 को टक्कर देने के लिए तैयार है...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <!-- News Item 2 -->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <a href="#" itemprop="url" class="text-decoration-none text-dark" aria-label="भारत में 5G नेटवर्क का विस्तार - पूरी खबर पढ़ें">
+                            <img src="media/dummy_image3.jpg" class="news-image fluid-img" alt="image of articale" itemprop="image"  loading="lazy"  width="300" height="150" >
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="category-badge" itemprop="articleSection">5G</span>
+                                    <time class="news-meta" itemprop="datePublished" datetime="2025-06-13T07:00:00+05:30">5h</time>
+                                </div>
+                                <h3 class="news-title h5" itemprop="headline">भारत में 5G नेटवर्क का विस्तार</h3>
+                                <p class="news-description" itemprop="description">देश के 100 नए शहरों में 5G सेवाएं शुरू की गई हैं। इससे हाई-स्पीड इंटरनेट का लाभ और भी लोगों को मिलेगा...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <!-- News Item 3 -->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <a href="#" itemprop="url" class="text-decoration-none text-dark" aria-label="नया फोल्डेबल स्मार्टफोन लॉन्च - पूरी खबर पढ़ें">
+                            <img src="media/WhatsApp%20Image%202025-06-07%20at%2012.04.21_70b20258.jpg" class="news-image fluid-img" alt="image of articale" itemprop="image"  loading="lazy"  width="300" height="150" >
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="category-badge" itemprop="articleSection">स्मार्टफोन</span>
+                                    <time class="news-meta" itemprop="datePublished" datetime="2025-06-13T02:00:00+05:30">8h</time>
+                                </div>
+                                <h3 class="news-title h5" itemprop="headline">नया फोल्डेबल स्मार्टफोन लॉन्च</h3>
+                                <p class="news-description" itemprop="description">बाजार में एक नया फोल्डेबल स्मार्टफोन आया है। इसमें नई तकनीक का इस्तेमाल किया गया है जो स्क्रीन को और मजबूत बनाता है...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <!-- News Item 4 -->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <a href="#" itemprop="url" class="text-decoration-none text-dark" aria-label="नई साइबर सुरक्षा नीति का ऐलान - पूरी खबर पढ़ें">
+                            <img src="media/metro.png" class="news-image fluid-img" alt="image of articale" itemprop="image"  loading="lazy"  width="300" height="150" >
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="category-badge" itemprop="articleSection">साइबर सुरक्षा</span>
+                                    <time class="news-meta" itemprop="datePublished" datetime="2025-06-12T22:00:00+05:30">12h</time>
+                                </div>
+                                <h3 class="news-title h5" itemprop="headline">नई साइबर सुरक्षा नीति का ऐलान</h3>
+                                <p class="news-description" itemprop="description">सरकार ने नई साइबर सुरक्षा नीति का ऐलान किया है। इसमें डेटा सुरक्षा को सर्वोच्च प्राथमिकता दी गई है...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <!-- News Item 5 -->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <a href="#" itemprop="url" class="text-decoration-none text-dark" aria-label="नई बैटरी टेक्नोलॉजी से इलेक्ट्रिक वाहनों में क्रांति - पूरी खबर पढ़ें">
+                            <img src="media/metro2.png" class="news-image fluid-img" alt="image of articale" itemprop="image"  loading="lazy"  width="300" height="150" >
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="category-badge" itemprop="articleSection">इलेक्ट्रिक वाहन</span>
+                                    <time class="news-meta" itemprop="datePublished" datetime="2025-06-12T13:00:00+05:30">1d</time>
+                                </div>
+                                <h3 class="news-title h5" itemprop="headline">नई बैटरी टेक्नोलॉजी से इलेक्ट्रिक वाहनों में क्रांति</h3>
+                                <p class="news-description" itemprop="description">नई बैटरी टेक्नोलॉजी से इलेक्ट्रिक वाहनों की रेंज दोगुनी हो सकती है। यह टेक्नोलॉजी जल्द ही भारत में उपलब्ध होगी...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <!--  Items news card  6-->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <a href="#" itemprop="url" class="text-decoration-none text-dark" aria-label="नया फोल्डेबल स्मार्टफोन लॉन्च - पूरी खबर पढ़ें">
+                            <img src="media/WhatsApp%20Image%202025-06-07%20at%2012.04.21_70b20258.jpg" class="news-image fluid-img" alt="image of articale" itemprop="image"  loading="lazy"  width="300" height="150" >
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="category-badge" itemprop="articleSection">स्मार्टफोन</span>
+                                    <time class="news-meta" itemprop="datePublished" datetime="2025-06-13T02:00:00+05:30">8h</time>
+                                </div>
+                                <h3 class="news-title h5" itemprop="headline">नया फोल्डेबल स्मार्टफोन लॉन्च</h3>
+                                <p class="news-description" itemprop="description">बाजार में एक नया फोल्डेबल स्मार्टफोन आया है। इसमें नई तकनीक का इस्तेमाल किया गया है जो स्क्रीन को और मजबूत बनाता है...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <!-- Items card  7-->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <a href="#" itemprop="url" class="text-decoration-none text-dark" aria-label="नया फोल्डेबल स्मार्टफोन लॉन्च - पूरी खबर पढ़ें">
+                            <img src="media/WhatsApp%20Image%202025-06-07%20at%2012.04.21_70b20258.jpg" class="news-image" alt="image of articale" itemprop="image"  loading="lazy"  width="300" height="150" >
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="category-badge" itemprop="articleSection">स्मार्टफोन</span>
+                                    <time class="news-meta" itemprop="datePublished" datetime="2025-06-13T02:00:00+05:30">8h</time>
+                                </div>
+                                <h3 class="news-title h5" itemprop="headline">नया फोल्डेबल स्मार्टफोन लॉन्च</h3>
+                                <p class="news-description" itemprop="description">बाजार में एक नया फोल्डेबल स्मार्टफोन आया है। इसमें नई तकनीक का इस्तेमाल किया गया है जो स्क्रीन को और मजबूत बनाता है...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <!-- Items card  8-->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <a href="#" itemprop="url" class="text-decoration-none text-dark" aria-label="नया फोल्डेबल स्मार्टफोन लॉन्च - पूरी खबर पढ़ें">
+                            <img src="media/WhatsApp%20Image%202025-06-07%20at%2012.04.21_70b20258.jpg" class="news-image" alt="image of articale" itemprop="image"  loading="lazy"  width="300" height="150" >
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="category-badge" itemprop="articleSection">स्मार्टफोन</span>
+                                    <time class="news-meta" itemprop="datePublished" datetime="2025-06-13T02:00:00+05:30">8h</time>
+                                </div>
+                                <h3 class="news-title h5" itemprop="headline">नया फोल्डेबल स्मार्टफोन लॉन्च</h3>
+                                <p class="news-description" itemprop="description">बाजार में एक नया फोल्डेबल स्मार्टफोन आया है। इसमें नई तकनीक का इस्तेमाल किया गया है जो स्क्रीन को और मजबूत बनाता है...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <!-- Items card  9-->
+                <div class="col-lg-4 col-md-6 mb-3">
+                    <article class="news-card" itemscope itemtype="https://schema.org/NewsArticle">
+                        <a href="#" itemprop="url" class="text-decoration-none text-dark" aria-label="नई बैटरी टेक्नोलॉजी से इलेक्ट्रिक वाहनों में क्रांति - पूरी खबर पढ़ें">
+                            <img src="media/metro2.png" class="news-image" alt="image of articale" itemprop="image"  loading="lazy"  width="300" height="150"  >
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="category-badge" itemprop="articleSection">इलेक्ट्रिक वाहन</span>
+                                    <time class="news-meta" itemprop="datePublished" datetime="2025-06-12T13:00:00+05:30">1d</time>
+                                </div>
+                                <h3 class="news-title h5" itemprop="headline">नई बैटरी टेक्नोलॉजी से इलेक्ट्रिक वाहनों में क्रांति</h3>
+                                <p class="news-description" itemprop="description">नई बैटरी टेक्नोलॉजी से इलेक्ट्रिक वाहनों की रेंज दोगुनी हो सकती है। यह टेक्नोलॉजी जल्द ही भारत में उपलब्ध होगी...</p>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+            </div>
+            <!-- Load More Button -->
+            <div class="text-center my-4">
+              <button class="btn btn-primary px-4" id="loadMoreBtn">और समाचार लोड करें</button>
+            </div>
+          </section>
+        </div>
+        <!-- Sidebar/Aside -->
+        <aside class="col-lg-3 col-md-4 d-block d-md-block">
+          <div class="card mb-3">
+            <div class="card-body p-2">
+              <h5 class="fw-bold mb-3" style="color:#d80000;"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" width="20" style="margin-right:5px;">लेटेस्ट</h5>
+              <ul class="list-unstyled latest-list">
+                <li class="mb-3">
+                  <a href="#" class="d-flex align-items-start text-decoration-none text-dark">
+                    <img src="https://i.ytimg.com/vi/abcd1234/hqdefault.jpg" width="70" class="rounded me-2" alt="Video thumbnail">
+                    <div>
+                      <div style="font-size:15px;font-weight:500;">दिल्ली में पारा 45 डिग्री सेल्सियस के पार, मौसम वैज्ञानिक ने दी ये चेतावनी</div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-3">
+                  <a href="#" class="d-flex align-items-start text-decoration-none text-dark">
+                    <img src="media/dummy_image2%20.jpg" width="70" class="rounded me-2" alt="Shahrukh news">
+                    <div>
+                      <div style="font-size:15px;font-weight:500;">Shahrukh के प्यार में थी Deepshikha Nagpal, लेकिन...</div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-3">
+                  <a href="#" class="d-flex align-items-start text-decoration-none text-dark">
+                    <img src="media/dummy_image3.jpg" width="70" class="rounded me-2" alt="Charu news" loading="lazy" alt="Rajeev news">
+                    <div>
+                      <div style="font-size:15px;font-weight:500;">Ex वाइफ Charu संग नहीं होगा Rajeev का पैचअप?</div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-3">
+                  <a href="#" class="d-flex align-items-start text-decoration-none text-dark">
+                    <img src="https://i.ytimg.com/vi/efgh5678/hqdefault.jpg" width="70" class="rounded me-2" alt="Patna news">
+                    <div>
+                      <div style="font-size:15px;font-weight:500;">पटना: स्कॉर्पियो ने 3 पुलिस जवानों को रौंदा; महिला कांस्टेबल की मौत, देखें मौके की तस्वीरें</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="d-flex align-items-start text-decoration-none text-dark">
+                    <img src="https://i.ytimg.com/vi/ijkl9012/hqdefault.jpg" width="70" class="rounded me-2" alt="AI Pregnancy">
+                    <div>
+                      <div style="font-size:15px;font-weight:500;">AI In Pregnancy: AI की मदद से 19 साल बाद प्रेग्नेंट हुई महिला, 15 बार करा चुकी थी IVF</div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Trending News Section -->
+          <div class="card mb-3">
+            <div class="card-body p-2">
+              <h5 class="fw-bold mb-3" style="color:#ff9800;"><img src="https://cdn-icons-png.flaticon.com/512/1828/1828925.png" width="20" style="margin-right:5px;">ट्रेंडिंग</h5>
+              <ul class="list-unstyled latest-list">
+                <li class="mb-3">
+                  <a href="#" class="d-flex align-items-start text-decoration-none text-dark">
+                    <img src="media/dummy_image2%20.jpg" width="70" class="rounded me-2" alt="Trending 1">
+                    <div>
+                      <div style="font-size:15px;font-weight:500;">AI से बनी फिल्म ने बॉक्स ऑफिस पर मचाया धमाल</div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-3">
+                  <a href="#" class="d-flex align-items-start text-decoration-none text-dark">
+                    <img src="media/dummy_image3.jpg" width="70" class="rounded me-2" alt="Trending 2">
+                    <div>
+                      <div style="font-size:15px;font-weight:500;">5G स्मार्टफोन की बिक्री में रिकॉर्ड बढ़ोतरी</div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-3">
+                  <a href="#" class="d-flex align-items-start text-decoration-none text-dark">
+                    <img src="https://i.ytimg.com/vi/ijkl9012/hqdefault.jpg" width="70" class="rounded me-2" alt="Trending 3">
+                    <div>
+                      <div style="font-size:15px;font-weight:500;">क्रिप्टोकरेंसी फिर चर्चा में, निवेशकों की दिलचस्पी बढ़ी</div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="d-flex align-items-start text-decoration-none text-dark">
+                    <img src="media/metro2.png" width="70" class="rounded me-2" alt="Trending 4">
+                    <div>
+                      <div style="font-size:15px;font-weight:500;">इलेक्ट्रिक वाहनों की डिमांड में जबरदस्त उछाल</div>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top bac" id="backToTop">↑</a>
+
+    <footer class="bg-light pt-4">
+        <div class="container">
+            <div class="row">
+            <!-- Logo & Contact Info -->
+            <div class="col-md-3 mb-4">
+                <img src="media/metro.png" alt="Metro Link Live" style="max-width: 150px;">
+                <p class="mt-3 mb-1"><strong>LIVE NEWS</strong><br>Metro Link</p>
+                <P class = "mt-3 mb-1" style="font-size: 15px;">RNI Regd.No MAHMUL03198/13/1/2013-TC</P>
+                <p><strong>Follow Us</strong></p>
+            </div>
+
+            <!-- News Columns -->
+            <div class="col-md-2 mb-4">
+                <h6><strong>News From Indian States</strong></h6>
+                <ul class="list-unstyled small">
+                <li><a href="#">Maharashtra News</a></li>
+                <li><a href="#">Madhya Pradesh News</a></li>
+                <li><a href="#">Delhi News</a></li>
+                </ul>
+                <h6><strong>Technology</strong></h6>
+                <ul class="list-unstyled small">
+                <li><a href="#">Artificial intelligence</a></li>
+                <li><a href="#">Cryptography</a></li>
+                <li><a href="#">Cyber Security</a></li>
+                </ul>
+            </div>
+
+            <!-- Lifestyle -->
+            <div class="col-md-2 mb-4">
+                <h6><strong>Lifestyle</strong></h6>
+                <ul class="list-unstyled small">
+                <li><a href="#">Health News</a></li>
+                <li><a href="#">Fitness News</a></li>
+                <li><a href="#">Fashion News</a></li>
+                <li><a href="#">Spirituality</a></li>
+                <li><a href="#">Astrology</a></li>
+                <li><a href="#">Daily Horoscope</a></li>
+                <li><a href="#">Astrology Predictions</a></li>
+                <li><a href="#">Astrologers</a></li>
+                <li><a href="#">Pujas</a></li>
+                </ul>
+            </div>
+
+            <!-- Entertainment -->
+            <div class="col-md-2 mb-4">
+                <h6><strong>Entertainment</strong></h6>
+                <ul class="list-unstyled small">
+                <li><a href="#">Bollywood News</a></li>
+                <li><a href="#">TV Serials</a></li>
+                <li><a href="#">Hollywood News</a></li>
+                <li><a href="#">Movie Reviews</a></li>
+                <li><a href="#">Photo Gallery</a></li>
+                <li><a href="#">Videos</a></li>
+                <li><a href="#">Shayari</a></li>
+                <li><a href="#">Hindi Jokes</a></li>
+                </ul>
+            </div>
+
+            <!-- Sports & Tools -->
+            <div class="col-md-3 mb-4">
+                <h6><strong>Sports News</strong></h6>
+                <ul class="list-unstyled small">
+                <li><a href="#">Cricket News</a></li>
+                <li><a href="#">Live Cricket Score</a></li>
+                <li><a href="#">Hockey</a></li>
+                <li><a href="#">Tennis</a></li>
+                <li><a href="#">Football</a></li>
+                </ul>
+                <h6 class="mt-3"><strong>Tools</strong></h6>
+                <ul class="list-unstyled small">
+                <li><a href="age.html">Age Calculator</a></li>
+                <li><a href="BMIindex.html">BMI Calculator</a></li>
+                <li><a href="GST.html">GST Calculator</a></li>
+                </ul>
+            </div>
+            </div>
+
+            <!-- Newsletter Subscribe -->
+            <div class="col-md-3 mb-4">
+            <h6><strong>Subscribe To Newsletter</strong></h6>
+            <form class="d-flex">
+                <input type="email" class="form-control me-2" placeholder="Enter your email">
+                <button class="btn btn-primary" type="submit">Subscribe</button>
+            </form>
+            </div>
+
+            <!-- App store section
+            <div class="row mt-3 mb-3">
+            <div class="col-md-3">
+                <p><strong>Now Available</strong></p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" style="width: 120px;">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store" style="width: 120px;" class="mt-2">
+            </div>
+            </div> -->
+
+            <!-- Footer Bottom -->
+            <div class="row border-top pt-3 mt-3">
+            <div class="col-md-9">
+                <small>
+                <a href="#">About Us</a> | 
+                <a href="#">Advertise with us</a> | 
+                <a href="#">Careers</a> | 
+                <a href="#">Privacy</a> | 
+                <a href="#">Cookies Policy</a> | 
+                <a href="#">Contact Us</a> | 
+                <a href="#">Terms and Conditions</a> |
+                <a href="#">Products and Services</a> | 
+                <a href="#">RSS Feeds</a> | 
+                <a href="#">Sitemap</a> | 
+                <a href="#">Code of Ethics</a> | 
+                <a href="#">Delete All Cookies</a>
+                </small>
+            </div>
+            </div>
+        </div>
+
+        <div style="background-color: #013C84;" class="text-center text-white py-2 mt-3">
+            &copy; 2025 Metro Link. All Rights Reserved.
+        </div>
+</footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        
+    let currentCity = 'Nagpur';
+  let currentLang = 'en';
+
+  function updateDateTime(lang = currentLang) {
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    // const timeOptions = { hour: '2-digit', minute: '2-digit' };
+    const locale = lang === 'hi' ? 'hi-IN' : (lang === 'mr' ? 'mr-IN' : 'en-US');
+    const dateStr = now.toLocaleDateString(locale, options);
+    // const timeStr = now.toLocaleTimeString(locale, timeOptions);
+    document.getElementById('datetime').textContent = `${dateStr} `;
+  }
+
+  async function fetchWeather() {
+    try {
+      const response = await fetch(`https://wttr.in/${currentCity}?format=%C+|+%t`);
+      const text = await response.text();
+      document.getElementById('weather').textContent = `🌤️ ${text}`;
+    } catch (error) {
+      document.getElementById('weather').textContent = '🌤️ Weather unavailable';
+      console.error('Weather fetch error:', error);
+    }
+  }
+
+    //   toggle side bar
+    function openSidebar() {
+        document.getElementById('sidebar').classList.add('open');
+        document.getElementById('sidebarOverlay').classList.add('open');
+    }
+    function closeSidebar() {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebarOverlay').classList.remove('open');
+    }
+  function toggleDropdown(id) {
+    const langDropdown = document.getElementById('langDropdown');
+    const cityDropdown = document.getElementById('cityDropdown');
+    const targetDropdown = document.getElementById(id);
+    
+    // Close other dropdown
+    if (id === 'langDropdown') {
+      cityDropdown.style.display = 'none';
+    } else {
+      langDropdown.style.display = 'none';
+    }
+    
+    // Toggle target dropdown
+    targetDropdown.style.display = targetDropdown.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function switchLanguage(lang) {
+    currentLang = lang;
+    updateDateTime();
+    document.getElementById('langDropdown').style.display = 'none';
+    document.querySelector('.lang-option').textContent = lang.toUpperCase();
+  }
+
+  function switchCity(city) {
+    currentCity = city;
+    fetchWeather();
+    document.getElementById('cityDropdown').style.display = 'none';
+    document.querySelector('.city-option').textContent = {Nagpur: 'NG', Mumbai: 'MU', Delhi: 'DL',Pune : 'PN', Aurangabad: 'AU',Nashik : 'NA'}[city];
+  }
+
+  // Initial load
+  updateDateTime();
+  fetchWeather();
+
+  // Refresh time every 30 seconds
+  setInterval(() => updateDateTime(), 30000);
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Load More Button
+        document.getElementById('loadMoreBtn').addEventListener('click', function() {
+            // Here you would typically load more news items
+            alert('More news would be loaded here from the server');
+        });
+    </script>
+</body>
+</html>

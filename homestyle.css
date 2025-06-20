@@ -1,5 +1,4 @@
-/* This is for sidebar */
-    .sidebar-overlay {
+.sidebar-overlay {
         display: none;
         position: fixed;
         z-index: 1040;
@@ -303,11 +302,13 @@
         justify-content: space-between;
     }
     
-    .fresh-news-item h6 {
-        margin: 0 0 0.25rem 1rem;
-        
-        font-size: 1rem;
-        font-weight: 600;
+    .fresh-news-item h6, 
+    .business-news-content h6,
+    .top-news-item-content h6,
+    .news-section-item-content h6 {
+    margin: 0 0 0.25rem 1rem;
+    font-size: 1rem;
+    font-weight: 400; /* Changed from 600 to 400 for normal weight */
     }
     .fresh-news-item small {
         color: #888;
@@ -399,7 +400,7 @@
     }
     .top-news-item-content h6 {
         font-size: 1rem;
-        font-weight: 600;
+        font-weight: 400; /* Changed from 600 to 400 for normal weight */
         margin-bottom: 0.5rem;
     }
     .top-news-item-content small {
@@ -407,6 +408,39 @@
         margin-top: auto;
         display: block;
     }
+    .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 44px;
+            height: 44px;
+            background: #013C84;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, background 0.2s;
+            z-index: 2000;
+            text-decoration: none;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .back-to-top:hover, .back-to-top:focus {
+            background: #0056b3;
+            color: #fff;
+            text-decoration: none;
+        }
+        .bac {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
     @media (max-width: 576px) {
         .top-news-list {
             flex-direction: column;
@@ -759,7 +793,7 @@
     .news-section-item h6 {
         margin: 0 0 0.5rem 0;
         font-size: 1rem;
-        font-weight: 600;
+        font-weight: 400; /* Changed from 600 to 400 for normal weight */
     }
 
     .news-section-item small {
@@ -793,6 +827,70 @@
         font-weight: 600;
     }
 
+    /* // news letter sub */
+    .cont {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .newsletter-section {
+      background-color: #013C84; /* Dark blue background */
+      color: #fff;
+      padding: 40px 60px;
+    }
+
+    .subscribe-text {
+      flex: 1 1 0;
+      margin-right: 40px;
+    }
+
+    .subscribe-text small {
+      display: block;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .subscribe-text h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    .subscribe-form {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .subscribe-form input[type="email"] {
+      padding: 15px 60px 15px 20px;
+      border: none;
+      border-radius: 2px;
+      width: 300px;
+      background-color: white; /* Yellow input background */
+      color: black;
+      font-size: 16px;
+    }
+
+    .subscribe-form input[type="email"]::placeholder {
+      color: black;
+      opacity: 0.8;
+    }
+
+    .subscribe-form button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      font-size: 18px;
+    }
     /* Responsive styles for weekly sections */
     @media (max-width: 576px) {
         .entertainment-news-section .row {
@@ -845,3 +943,27 @@
             text-align: center;
         }
     }
+
+    /* Carousel caption label for fresh news section */
+.carousel-caption.d-none.d-md-block {
+    background: rgba(0, 0, 0, 0.45); /* Custom blue background with opacity */
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem; 
+    font-size: 1.2rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    text-align: left;
+}
+@media (max-width: 576px) {
+  .carousel-caption.d-none.d-md-block {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+  }
+}
